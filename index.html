@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>口腔KOS起号助手（线上版）</title>
+  <style>
+    :root{
+      --bg:#f7fbfb; --card:#fff; --line:#dfecef; --text:#516874; --text2:#7f96a1;
+      --primary2:#c7e6e5; --primary3:#b4d0e8; --soft:#eef6f7;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;background:linear-gradient(180deg,#f8fcfc,#f1f7f8);color:var(--text);display:flex;justify-content:center}
+    .app{width:100%;max-width:430px;min-height:100vh;padding:12px 12px 36px}
+    .top{padding:12px 6px 14px}
+    .top-mini{font-size:12px;color:#8FA3AD;text-align:center;margin-bottom:8px}
+    .title{font-size:20px;font-weight:800;color:#5a7582;text-align:center}
+    .sub{font-size:12px;color:var(--text2);text-align:center;margin-top:6px;line-height:1.6}
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+    .section-title{font-size:16px;font-weight:800;color:#5a7582;margin-bottom:8px}
+    .label{display:block;font-size:12px;font-weight:800;margin-top:10px;margin-bottom:6px;color:#6b8793}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .select,.textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--text);font-size:14px;outline:none}
+    .textarea{min-height:86px;resize:vertical}
+    .pillbar{display:flex;gap:8px;overflow:auto}
+    .pillbar::-webkit-scrollbar{display:none}
+    .pill{border:none;background:var(--soft);padding:9px 12px;border-radius:999px;font-size:12px;font-weight:700;color:#6c8793;white-space:nowrap}
+    .pill.active{background:linear-gradient(135deg,var(--primary2),var(--primary3));color:#58727f}
+    .recommend{margin-top:10px;background:#f9fcfd;border:1px solid var(--line);border-radius:14px;padding:12px}
+    .recommend-title{font-size:11px;font-weight:800;color:#7a93a0;margin-bottom:6px}
+    .recommend-main{font-size:13px;font-weight:800;color:#55717d;margin-bottom:4px}
+    .recommend-desc,.recommend-avoid{font-size:11px;line-height:1.6;color:#7f96a1}
+    .recommend-avoid{color:#ad7d7d;margin-top:4px}
+    .combo{margin-top:8px;font-size:11px;line-height:1.6;color:#7f96a1}
+    .button{width:100%;margin-top:12px;border:none;border-radius:14px;padding:13px 16px;background:linear-gradient(135deg,var(--primary2),var(--primary3));font-size:15px;font-weight:800;color:#56717d}
+    .hint{font-size:11px;color:#8ba1ab;line-height:1.6;margin-top:8px}
+    .result-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+    .result-title{font-size:14px;font-weight:800;color:#5a7582;margin-bottom:8px}
+    .result-block{background:#f9fcfd;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+    .result-block:last-child{margin-bottom:0}
+    .result-block p{margin:0;font-size:13px;line-height:1.8;color:#5d7581;white-space:pre-wrap}
+    .hidden{display:none!important}
+    .deploy-note{font-size:11px;line-height:1.6;color:#8aa0a9;margin-top:8px}
+    @media (max-width:390px){.row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top">
+      <div class="top-mini">医疗行业 · 平台专家 · 旺旺</div>
+      <div class="title">口腔KOS起号助手</div>
+      <div class="sub">GitHub Pages 前端 + Render 后端版｜按 SPU × 内容大类 × 内容切口 × 图文/视频 生成真实可用底稿</div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">策略选择</div>
+      <label class="label">品项</label>
+      <div class="pillbar" id="spuPills"></div>
+
+      <div class="row">
+        <div>
+          <label class="label">内容形式</label>
+          <select id="format" class="select">
+            <option value="post">图文</option>
+            <option value="video">视频</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">生成目标</label>
+          <select id="goal" class="select">
+            <option value="拉咨询">拉咨询</option>
+            <option value="拉点击">拉点击</option>
+            <option value="建信任">建信任</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label class="label">人设</label>
+          <select id="persona" class="select">
+            <option value="医生">医生</option>
+            <option value="助理">助理</option>
+            <option value="机构号">机构号</option>
+          </select>
+        </div>
+        <div>
+          <label class="label">内容大类</label>
+          <select id="contentGroup" class="select"></select>
+        </div>
+      </div>
+
+      <label class="label">内容切口</label>
+      <select id="contentAngle" class="select"></select>
+      <div id="recommendBox" class="recommend"></div>
+      <div id="comboLine" class="combo"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">内容输入</div>
+      <label class="label">用户痛点</label>
+      <textarea id="pain" class="textarea" placeholder="例如：门牙有缝，拍照特别明显，不知道要不要做贴面"></textarea>
+      <label class="label">核心卖点</label>
+      <textarea id="selling" class="textarea" placeholder="例如：会先判断适不适合，不一上来走很重的方案"></textarea>
+      <button id="generateBtn" class="button">生成内容</button>
+      <div class="deploy-note">发布前请把页面里的 <code>API_BASE</code> 改成你的 Render 地址。</div>
+    </div>
+
+    <div id="result" class="hidden"></div>
+  </div>
+
+<script>
+const API_BASE = "https://YOUR-RENDER-SERVICE.onrender.com";
+
+const spuOptions = {
+  "种植牙": {
+    groups: {
+      "认知破圈": ["技术差异化", "缺牙危害", "风险提醒", "传统方案误区", "判断型答疑"],
+      "转化承接": ["引流转化", "牙片帮看", "预约号位", "适合人群判断"],
+      "信任建立": ["医生人设", "医生观点", "治疗理念", "劝退型", "真实沟通记录"]
+    }
+  },
+  "牙贴面": {
+    groups: {
+      "高意向转化": ["精准症状转化", "门牙缝", "过小牙", "牙黄", "单颗修复", "不磨牙/少磨牙"],
+      "决策答疑": ["能保持多久", "会不会伤牙", "一颗能不能做", "树脂vs瓷", "适合人群", "做之前要知道什么"],
+      "医生信任": ["医生人设", "审美理念", "劝退型", "案例判断逻辑"]
+    }
+  },
+  "正畸": {
+    groups: {
+      "前置判断": ["判断型", "劝退型", "需要不需要做", "牙性/骨性判断", "严重程度判断"],
+      "审美认知": ["审美误区", "脸型vs牙齿", "嘴凸认知", "鼻基底/侧貌认知"],
+      "案例解释": ["案例解释", "变化逻辑", "深覆合", "嘴凸", "下巴后缩"]
+    }
+  }
+};
+
+let currentSpu = "种植牙";
+
+const recommendMap = {
+  "种植牙": {
+    main: "优先推荐：认知破圈 + 转化承接",
+    desc: "先用技术差异和风险判断破圈，再用牙片帮看、预约承接咨询。",
+    avoid: "不建议一上来只做纯科普。"
+  },
+  "牙贴面": {
+    main: "优先推荐：高意向转化 + 决策答疑",
+    desc: "先打具体症状词，再补 FAQ 决策答疑，最适合高意向转化。",
+    avoid: "不建议一上来写太泛的变美文案。"
+  },
+  "正畸": {
+    main: "优先推荐：前置判断 + 审美认知",
+    desc: "先帮用户判断问题，再打破认知误区，比直接讲方案更稳。",
+    avoid: "不建议一开始就重案例、重方案。"
+  }
+};
+
+function renderSpuPills(){
+  const box = document.getElementById('spuPills');
+  box.innerHTML = Object.keys(spuOptions).map(spu => `
+    <button class="pill ${spu === currentSpu ? 'active' : ''}" data-spu="${spu}">${spu}</button>
+  `).join('');
+  box.querySelectorAll('.pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentSpu = btn.dataset.spu;
+      renderSpuPills();
+      renderGroupAndAngle();
+      renderRecommend();
+      renderCombo();
+    });
+  });
+}
+
+function renderGroupAndAngle(){
+  const groupSelect = document.getElementById('contentGroup');
+  const angleSelect = document.getElementById('contentAngle');
+  const groups = spuOptions[currentSpu].groups;
+  const groupNames = Object.keys(groups);
+  groupSelect.innerHTML = groupNames.map(g => `<option value="${g}">${g}</option>`).join('');
+  angleSelect.innerHTML = groups[groupSelect.value].map(a => `<option value="${a}">${a}</option>`).join('');
+  groupSelect.onchange = () => {
+    angleSelect.innerHTML = groups[groupSelect.value].map(a => `<option value="${a}">${a}</option>`).join('');
+    renderCombo();
+  };
+  angleSelect.onchange = renderCombo;
+}
+
+function renderRecommend(){
+  const data = recommendMap[currentSpu];
+  document.getElementById('recommendBox').innerHTML = `
+    <div class="recommend-title">推荐方向</div>
+    <div class="recommend-main">${data.main}</div>
+    <div class="recommend-desc">${data.desc}</div>
+    <div class="recommend-avoid">${data.avoid}</div>
+  `;
+}
+
+function renderCombo(){
+  const format = document.getElementById('format').value === 'video' ? '视频' : '图文';
+  const goal = document.getElementById('goal').value;
+  const persona = document.getElementById('persona').value;
+  const group = document.getElementById('contentGroup').value;
+  const angle = document.getElementById('contentAngle').value;
+  document.getElementById('comboLine').innerHTML =
+    `当前会按：<b>${currentSpu}</b> × <b>${group}</b> × <b>${angle}</b> × <b>${persona}</b> × <b>${goal}</b> 生成<b>${format}</b>。`;
+}
+
+function escapeHtml(str){
+  return String(str || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+async function generateContent(){
+  const payload = {
+    spu: currentSpu,
+    contentGroup: document.getElementById('contentGroup').value,
+    contentAngle: document.getElementById('contentAngle').value,
+    format: document.getElementById('format').value,
+    persona: document.getElementById('persona').value,
+    goal: document.getElementById('goal').value,
+    pain: document.getElementById('pain').value.trim(),
+    selling: document.getElementById('selling').value.trim()
+  };
+
+  const resultBox = document.getElementById('result');
+  resultBox.classList.remove('hidden');
+  resultBox.innerHTML = `
+    <div class="result-card">
+      <div class="result-title">生成中…</div>
+      <div class="result-block"><p>正在请求 AI 接口，请稍等。</p></div>
+    </div>
+  `;
+
+  try{
+    const resp = await fetch(`${API_BASE}/api/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const json = await resp.json();
+    if(!json.ok) throw new Error(json.error || 'generation_failed');
+    const data = json.data;
+
+    if(payload.format === 'video'){
+      resultBox.innerHTML = `
+        <div class="result-card">
+          <div class="result-title">标题（3版可选）</div>
+          ${data.titles.map((t, i) => `<div class="result-block"><p><b>版本${i+1}</b>｜${escapeHtml(t)}</p></div>`).join('')}
+        </div>
+        <div class="result-card">
+          <div class="result-title">开头3秒</div>
+          <div class="result-block"><p>${escapeHtml(data.hook)}</p></div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">视频脚本</div>
+          <div class="result-block"><p>${escapeHtml(data.script)}</p></div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">评论区引导</div>
+          <div class="result-block"><p>${escapeHtml(data.commentCTA)}</p></div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">使用提醒</div>
+          <div class="result-block"><p>${escapeHtml(data.usageNote)}</p></div>
+        </div>
+      `;
+    } else {
+      resultBox.innerHTML = `
+        <div class="result-card">
+          <div class="result-title">标题（3版可选）</div>
+          ${data.titles.map((t, i) => `<div class="result-block"><p><b>版本${i+1}</b>｜${escapeHtml(t)}</p></div>`).join('')}
+        </div>
+        <div class="result-card">
+          <div class="result-title">封面文案</div>
+          <div class="result-block"><p>${escapeHtml(data.coverText)}</p></div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">正文成稿</div>
+          <div class="result-block"><p>${escapeHtml(data.body)}</p></div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">评论区引导</div>
+          <div class="result-block"><p>${escapeHtml(data.commentCTA)}</p></div>
+        </div>
+        <div class="result-card">
+          <div class="result-title">使用提醒</div>
+          <div class="result-block"><p>${escapeHtml(data.usageNote)}</p></div>
+        </div>
+      `;
+    }
+  } catch(err){
+    resultBox.innerHTML = `
+      <div class="result-card">
+        <div class="result-title">生成失败</div>
+        <div class="result-block"><p>请检查 Render 后端是否已上线，并确认页面里的 API_BASE 已改成你的后端地址。</p></div>
+      </div>
+    `;
+    console.error(err);
+  }
+}
+
+document.getElementById('format').addEventListener('change', renderCombo);
+document.getElementById('goal').addEventListener('change', renderCombo);
+document.getElementById('persona').addEventListener('change', renderCombo);
+document.getElementById('generateBtn').addEventListener('click', generateContent);
+
+renderSpuPills();
+renderGroupAndAngle();
+renderRecommend();
+renderCombo();
+</script>
+</body>
+</html>
