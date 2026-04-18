@@ -2,316 +2,2549 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>口腔KOS起号助手（线上版）</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>口腔KOS起号助手（试用版）</title>
   <style>
     :root{
-      --bg:#f7fbfb; --card:#fff; --line:#dfecef; --text:#516874; --text2:#7f96a1;
-      --primary2:#c7e6e5; --primary3:#b4d0e8; --soft:#eef6f7;
+      --bg:#F7FBFB;
+      --card:#FFFFFF;
+      --line:#E6F0F2;
+      --c1:#C7E6E5;
+      --c2:#C3E3EF;
+      --c3:#C0E4E8;
+      --c4:#B4D0E8;
+      --c5:#E9F4F0;
+      --primary:#8FB9C7;
+      --primary-deep:#7EAABD;
+      --text:#4F6470;
+      --text-2:#7D939E;
+      --text-3:#9FB0B8;
+      --shadow:0 8px 24px rgba(168, 194, 204, 0.18);
+      --shadow-soft:0 4px 14px rgba(180, 208, 232, 0.16);
+      --radius:18px;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;background:linear-gradient(180deg,#f8fcfc,#f1f7f8);color:var(--text);display:flex;justify-content:center}
-    .app{width:100%;max-width:430px;min-height:100vh;padding:12px 12px 36px}
-    .top{padding:12px 6px 14px}
-    .top-mini{font-size:12px;color:#8FA3AD;text-align:center;margin-bottom:8px}
-    .title{font-size:20px;font-weight:800;color:#5a7582;text-align:center}
-    .sub{font-size:12px;color:var(--text2);text-align:center;margin-top:6px;line-height:1.6}
-    .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
-    .section-title{font-size:16px;font-weight:800;color:#5a7582;margin-bottom:8px}
-    .label{display:block;font-size:12px;font-weight:800;margin-top:10px;margin-bottom:6px;color:#6b8793}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .select,.textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;color:var(--text);font-size:14px;outline:none}
-    .textarea{min-height:86px;resize:vertical}
-    .pillbar{display:flex;gap:8px;overflow:auto}
-    .pillbar::-webkit-scrollbar{display:none}
-    .pill{border:none;background:var(--soft);padding:9px 12px;border-radius:999px;font-size:12px;font-weight:700;color:#6c8793;white-space:nowrap}
-    .pill.active{background:linear-gradient(135deg,var(--primary2),var(--primary3));color:#58727f}
-    .recommend{margin-top:10px;background:#f9fcfd;border:1px solid var(--line);border-radius:14px;padding:12px}
-    .recommend-title{font-size:11px;font-weight:800;color:#7a93a0;margin-bottom:6px}
-    .recommend-main{font-size:13px;font-weight:800;color:#55717d;margin-bottom:4px}
-    .recommend-desc,.recommend-avoid{font-size:11px;line-height:1.6;color:#7f96a1}
-    .recommend-avoid{color:#ad7d7d;margin-top:4px}
-    .combo{margin-top:8px;font-size:11px;line-height:1.6;color:#7f96a1}
-    .button{width:100%;margin-top:12px;border:none;border-radius:14px;padding:13px 16px;background:linear-gradient(135deg,var(--primary2),var(--primary3));font-size:15px;font-weight:800;color:#56717d}
-    .hint{font-size:11px;color:#8ba1ab;line-height:1.6;margin-top:8px}
-    .result-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
-    .result-title{font-size:14px;font-weight:800;color:#5a7582;margin-bottom:8px}
-    .result-block{background:#f9fcfd;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
-    .result-block:last-child{margin-bottom:0}
-    .result-block p{margin:0;font-size:13px;line-height:1.8;color:#5d7581;white-space:pre-wrap}
-    .hidden{display:none!important}
-    .deploy-note{font-size:11px;line-height:1.6;color:#8aa0a9;margin-top:8px}
-    @media (max-width:390px){.row{grid-template-columns:1fr}}
+    *{ box-sizing:border-box; }
+    html,body{
+      margin:0; padding:0;
+      background:linear-gradient(180deg,#F9FCFC 0%, #F2F8F9 100%);
+      font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
+      color:var(--text);
+    }
+    body{ display:flex; justify-content:center; }
+    .app{ width:100%; max-width:430px; min-height:100vh; padding-bottom:88px; }
+    .container{ padding:14px 14px 28px; }
+    .hidden{ display:none !important; }
+
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:blur(14px);
+      background:rgba(247,251,251,.88);
+      border-bottom:1px solid rgba(195,227,239,.55);
+    }
+    .topbar-inner{ max-width:430px; margin:0 auto; padding:14px 14px 10px; }
+    .app-title{ font-size:20px; font-weight:700; color:#5A7582; display:flex; align-items:center; gap:8px; }
+    .app-sub{ margin-top:4px; font-size:12px; color:var(--text-2); line-height:1.6; }
+
+    .item-switch{ display:flex; gap:8px; overflow-x:auto; padding-top:12px; padding-bottom:2px; }
+    .item-switch::-webkit-scrollbar{ display:none; }
+    .item-chip{
+      border:none; white-space:nowrap; border-radius:999px;
+      background:#EEF6F7; color:var(--text-2);
+      padding:8px 12px; font-size:12px; font-weight:700;
+      box-shadow:inset 0 0 0 1px rgba(195,227,239,.8);
+    }
+    .item-chip.active{ background:linear-gradient(135deg,var(--c1),var(--c4)); color:#5A7582; box-shadow:none; }
+
+    .tab{ display:flex; gap:8px; margin-top:12px; }
+    .tab button{
+      flex:1; border:none; background:#EEF6F7; color:var(--text-2);
+      padding:10px 8px; border-radius:999px; font-size:13px; font-weight:600;
+      box-shadow:inset 0 0 0 1px rgba(195,227,239,.8);
+    }
+    .tab .active{ background:linear-gradient(135deg,var(--c1),var(--c4)); color:#5A7582; box-shadow:none; }
+
+    .hero-card{
+      background:linear-gradient(135deg,#FDFEFE 0%, #EEF8F8 52%, #EAF3FB 100%);
+      border-radius:24px; padding:18px; box-shadow:var(--shadow);
+      border:1px solid rgba(195,227,239,.7); margin-bottom:14px;
+    }
+    .hero-badge{ display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(180,208,232,.32); color:#6A8894; font-size:11px; font-weight:700; margin-bottom:10px; }
+    .hero-title{ font-size:22px; line-height:1.35; font-weight:700; color:#56717D; margin-bottom:8px; }
+    .hero-desc{ font-size:13px; line-height:1.7; color:var(--text-2); }
+    .hero-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .hero-tags span{ padding:7px 10px; border-radius:999px; background:#FFFFFF; color:#6E8894; font-size:11px; box-shadow:var(--shadow-soft); }
+
+    .quick-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+    .quick-card{ background:var(--card); border-radius:20px; padding:14px; box-shadow:var(--shadow-soft); border:1px solid rgba(199,230,229,.65); }
+    .quick-icon{ font-size:22px; margin-bottom:10px; }
+    .quick-title{ font-size:14px; font-weight:700; color:#5F7A86; margin-bottom:4px; }
+    .quick-desc{ font-size:12px; line-height:1.6; color:var(--text-2); }
+
+    .home-section{ margin-bottom:14px; }
+    .section-title{ font-size:15px; font-weight:700; color:#5B7581; margin-bottom:10px; }
+    .home-flow{ display:flex; flex-direction:column; gap:10px; }
+    .flow-item{ display:flex; gap:10px; align-items:flex-start; background:#FFFFFF; border-radius:18px; padding:12px; box-shadow:var(--shadow-soft); border:1px solid rgba(195,227,239,.55); }
+    .flow-num{ width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--c1),var(--c4)); color:#64818D; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
+    .flow-title{ font-size:13px; font-weight:700; color:#5C7783; margin-bottom:3px; }
+    .flow-desc{ font-size:12px; line-height:1.6; color:var(--text-2); }
+
+    .notice-card{ background:#FFFFFF; border-radius:20px; padding:14px; box-shadow:var(--shadow-soft); border:1px solid rgba(233,244,240,.9); }
+    .notice-item{ font-size:12px; line-height:1.7; color:#6F8791; padding:8px 0; border-bottom:1px solid #EEF4F5; }
+    .notice-item:last-child{ border-bottom:none; }
+
+    .ref-header{ margin-bottom:12px; }
+    .ref-title{ font-size:18px; font-weight:700; color:#5A7682; margin-bottom:4px; }
+    .ref-sub{ font-size:12px; color:#9aa4af; }
+
+    .card,.plan-card,.preview-content-card,.compliance-card{
+      background:#fff; border-radius:18px; padding:14px; border:1px solid rgba(195,227,239,.62); box-shadow:var(--shadow-soft);
+    }
+    .form-row{ margin-bottom:14px; }
+    .form-label{ display:block; font-size:12px; color:#cfd6dd; margin-bottom:7px; font-weight:600; color:#6D8793; }
+    .form-input,.form-textarea,select,textarea,input{
+      width:100%; background:#FDFEFE; border:1px solid #DDECEE; border-radius:12px; color:var(--text); padding:12px 12px; font-size:14px; outline:none;
+    }
+    .form-textarea,textarea{ min-height:88px; resize:vertical; }
+    .form-input:focus,.form-textarea:focus,select:focus,textarea:focus,input:focus{ border-color:var(--primary); box-shadow:0 0 0 3px rgba(180,208,232,.18); }
+    .btn{
+      width:100%; border:none; background:linear-gradient(135deg,var(--c1),var(--c4)); color:#5D7A86; padding:12px 14px; border-radius:14px; font-size:14px; font-weight:700;
+    }
+    .tip,.warn{
+      background:#F7FBFB; border:1px solid #E2EEF0; border-radius:14px; padding:12px; font-size:12px; line-height:1.7; color:#7F96A1; margin-top:12px;
+    }
+
+    .plan-wrap{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+    .plan-title{ font-size:14px; font-weight:700; color:#5A7582; margin-bottom:10px; }
+    .plan-subtitle{ font-size:12px; color:#8AA0AA; margin-bottom:10px; }
+    .matrix-grid,.todo-list,.tip-list,.benchmark-list{ display:flex; flex-direction:column; gap:8px; }
+    .matrix-item,.todo-item,.tip-item,.benchmark-item{ background:#F8FCFC; border:1px solid #E2EEF0; border-radius:14px; padding:12px; }
+    .matrix-role,.bm-title{ font-size:13px; font-weight:700; color:#5A7582; margin-bottom:4px; }
+    .matrix-desc,.bm-desc,.bm-tip,.todo-item,.tip-item{ font-size:12px; line-height:1.7; color:#7F96A1; }
+    .bm-tip{ margin-top:6px; }
+    .path-block{ background:#FDFEFE; border:1px solid #E5F0F1; border-radius:14px; padding:12px; }
+    .path-title{ font-size:12px; font-weight:700; color:#7EAABD; margin-bottom:6px; }
+    .path-text{ font-size:12px; line-height:1.8; color:#617B87; white-space:pre-wrap; }
+    .kpi-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .kpi-item{ background:#F8FCFC; border:1px solid #E2EEF0; border-radius:14px; padding:12px; }
+    .kpi-label{ font-size:11px; color:#90A5AF; margin-bottom:4px; }
+    .kpi-value{ font-size:14px; font-weight:700; color:#5A7582; }
+    .plan-highlight{ display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; background:#EEF7F8; color:#76919D; font-size:11px; font-weight:700; margin-bottom:10px; }
+    .speed-chip{ display:inline-flex; align-items:center; padding:5px 9px; border-radius:999px; background:linear-gradient(135deg,#C7E6E5,#B4D0E8); color:#5D7A86; font-size:11px; font-weight:700; margin-left:8px; }
+
+    .filter-bar{ display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:12px; }
+    .filter-bar::-webkit-scrollbar{ display:none; }
+    .filter-btn{ border:none; background:#EEF6F7; color:#9aa4af; padding:8px 14px; border-radius:999px; font-size:12px; white-space:nowrap; }
+    .filter-btn.active{ background:linear-gradient(135deg,var(--c1),var(--c4)); color:#5A7582; }
+
+    .ref-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .ref-card{ background:#fff; border-radius:16px; padding:12px; border:1px solid #e5f0f1; box-shadow:var(--shadow-soft); }
+    .ref-card-top{ display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:8px; }
+    .ref-badge{ display:inline-flex; align-items:center; padding:5px 8px; border-radius:999px; background:#EEF7F8; color:#76919D; font-size:10px; font-weight:700; }
+    .ref-title-sm{ font-size:13px; font-weight:700; color:#5A7582; line-height:1.45; }
+    .ref-desc{ font-size:12px; color:#7f96a1; margin-top:4px; line-height:1.6; }
+    .ref-meta{ font-size:11px; color:#9fb0b8; margin-top:8px; }
+
+    .seg-wrap{ display:flex; gap:8px; }
+    .seg-btn{ flex:1; border:none; background:#1a222c0d; color:#7D939E; padding:10px 12px; border-radius:12px; font-size:13px; font-weight:600; }
+    .seg-btn.active{ background:linear-gradient(135deg,var(--c1),var(--c4)); color:#5A7582; }
+
+    .ai-preview{ display:flex; flex-direction:column; gap:14px; margin-top:12px; }
+    .preview-phone{ background:linear-gradient(180deg,#FDFEFE 0%, #F6FBFB 100%); border:1px solid rgba(195,227,239,.7); border-radius:24px; padding:14px; box-shadow:0 8px 24px rgba(180,208,232,.18); }
+    .preview-cover{ aspect-ratio:3/4.1; border-radius:20px; padding:14px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 28%), linear-gradient(135deg, #E9F4F0 0%, #C7E6E5 42%, #C3E3EF 72%, #B4D0E8 100%); }
+    .preview-cover-top{ display:flex; justify-content:space-between; align-items:center; gap:8px; }
+    .preview-badge{ display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.68); color:#6C8792; font-size:10px; font-weight:700; }
+    .preview-emoji{ font-size:54px; text-align:center; line-height:1; filter:drop-shadow(0 6px 10px rgba(255,255,255,.26)); }
+    .preview-cover-text{ padding:10px 12px; border-radius:16px; background:rgba(255,255,255,.34); backdrop-filter:blur(7px); box-shadow:inset 0 0 0 1px rgba(255,255,255,.24); }
+    .preview-cover-title{ font-size:20px; line-height:1.28; font-weight:800; color:#56717D; letter-spacing:-0.02em; white-space:pre-wrap; }
+    .preview-cover-sub{ margin-top:6px; font-size:11px; line-height:1.5; color:#76909D; }
+    .preview-meta{ display:flex; align-items:center; justify-content:space-between; margin-top:12px; gap:10px; }
+    .preview-author{ display:flex; align-items:center; gap:8px; min-width:0; }
+    .preview-avatar{ width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,#C7E6E5,#B4D0E8); box-shadow:0 3px 8px rgba(180,208,232,.28); flex-shrink:0; }
+    .preview-author-name{ font-size:12px; font-weight:700; color:#64808C; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .preview-action{ font-size:11px; color:#8BA1AB; }
+    .preview-section-title{ font-size:12px; color:#7EAABD; font-weight:700; margin-bottom:8px; }
+    .preview-title-list{ display:flex; flex-direction:column; gap:8px; }
+    .preview-title-item{ background:#F8FCFC; border:1px solid #E3EFF1; border-radius:12px; padding:10px 12px; font-size:13px; line-height:1.6; color:#5B7682; }
+    .preview-body{ background:#FDFEFE; border:1px solid #E5F0F1; border-radius:14px; padding:12px; font-size:13px; line-height:1.8; color:#617B87; white-space:pre-wrap; }
+    .preview-comment{ background:#F6FBFB; border:1px dashed #CFE4E9; border-radius:14px; padding:12px; font-size:12px; line-height:1.7; color:#728A95; }
+    .script-list{ display:flex; flex-direction:column; gap:10px; }
+    .script-card{ background:#FBFEFE; border:1px solid #E2EEF0; border-radius:16px; padding:12px; }
+    .script-shot{ font-size:11px; color:#7EAABD; font-weight:700; margin-bottom:6px; }
+    .script-text{ font-size:13px; line-height:1.7; color:#617B87; white-space:pre-wrap; }
+    .compliance-list{ display:flex; flex-direction:column; gap:8px; }
+    .compliance-line{ font-size:12px; line-height:1.7; color:#6E8792; padding-left:12px; position:relative; }
+    .compliance-line::before{ content:''; width:6px; height:6px; border-radius:50%; background:#9FC7D2; position:absolute; left:0; top:9px; }
+    .result-actions{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .soft-btn{ border:none; background:#EEF6F7; color:#6D8793; padding:11px 12px; border-radius:12px; font-size:13px; font-weight:700; }
+
+    @media (max-width:390px){
+      .preview-cover-title{ font-size:18px; }
+      .preview-emoji{ font-size:48px; }
+      .ref-grid{ gap:10px; }
+    }
+  
+    .learn-head{ margin-bottom:12px; }
+    .learn-title{ font-size:18px; font-weight:700; color:#5A7582; margin-bottom:4px; }
+    .learn-sub{ font-size:12px; color:#8EA2AC; line-height:1.6; }
+    .learn-filter-bar{ display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:12px; }
+    .learn-filter-bar::-webkit-scrollbar{ display:none; }
+    .learn-filter-btn{ border:none; background:#EEF6F7; color:#7A95A1; padding:8px 12px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+    .learn-filter-btn.active{ background:linear-gradient(135deg,#C7E6E5,#B4D0E8); color:#5D7A86; }
+    .rule-card,.mistake-card{ background:#fff; border-radius:16px; padding:14px; border:1px solid rgba(195,227,239,.62); box-shadow:var(--shadow-soft); }
+    .rule-title{ font-size:14px; font-weight:700; margin-bottom:8px; color:#5A7582; }
+    .rule-item{ font-size:12px; color:#7F96A1; line-height:1.6; margin-bottom:4px; }
+    .ref-section{ margin-bottom:18px; }
+    .ref-type-card{ background:#fff; border-radius:18px; padding:14px; border:1px solid rgba(195,227,239,.62); box-shadow:0 6px 20px rgba(180,208,232,.12); margin-bottom:10px; }
+    .ref-type-title{ font-size:14px; font-weight:700; color:#5A7582; margin-bottom:6px; }
+    .ref-type-desc{ font-size:12px; line-height:1.7; color:#7F96A1; }
+    .ref-type-meta{ margin-top:8px; font-size:11px; color:#90A5AF; }
+    .ref-type-role{ font-size:11px; color:#6F8D98; margin-top:6px; }
+    .ref-type-strength{ font-size:11px; color:#4A8B8B; margin-top:4px; }
+    .ref-type-warning{ font-size:11px; color:#B38484; margin-top:4px; }
+    .ref-notes-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .ref-note-card{ display:block; text-decoration:none; color:inherit; background:#fff; border-radius:18px; overflow:hidden; border:1px solid rgba(195,227,239,.62); box-shadow:0 6px 20px rgba(180,208,232,.12); }
+    .ref-note-cover{ aspect-ratio:3/4.15; position:relative; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 28%), linear-gradient(135deg, #E9F4F0 0%, #C7E6E5 42%, #C3E3EF 72%, #B4D0E8 100%); }
+    .ref-note-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .ref-note-ph{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:34px; color:#6F8D98; }
+    .ref-note-overlay{ position:absolute; left:10px; right:10px; bottom:10px; padding:8px 10px; border-radius:14px; background:rgba(255,255,255,.34); backdrop-filter:blur(7px); box-shadow:inset 0 0 0 1px rgba(255,255,255,.24); }
+    .ref-note-overlay-title{ font-size:15px; line-height:1.3; font-weight:800; color:#56717D; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .ref-note-body{ padding:10px; }
+    .ref-note-title{ font-size:12px; line-height:1.5; font-weight:700; color:#5A7582; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:36px; }
+    .ref-note-tag{ margin-top:6px; font-size:10px; color:#8FA6AF; }
+    .ref-note-disabled{ opacity:.96; cursor:default; }
+    .note-structure{ position:absolute; top:8px; left:8px; background:rgba(255,255,255,.75); font-size:10px; padding:3px 7px; border-radius:8px; color:#5A7582; font-weight:700; }
+    .top-tag{ position:absolute; top:8px; right:8px; background:#ff8a00; color:#fff; font-size:10px; padding:3px 7px; border-radius:8px; font-weight:700; }
+    .note-meta{ margin-top:6px; display:flex; gap:6px; flex-wrap:wrap; }
+    .note-meta span{ font-size:10px; background:#eef5f7; padding:3px 6px; border-radius:6px; color:#6F8D98; }
+
+  
+    .header-meta{ margin-top:4px; font-size:11px; color:#9AA8B0; text-align:center; letter-spacing:.2px; }
+
+    @media (max-width: 768px){
+      html,body{ overflow-x:hidden; }
+      body{ display:block; }
+      .app{ max-width:none; width:100%; padding-bottom:96px; }
+      .topbar-inner{ max-width:none; }
+      .app-title{ justify-content:center; text-align:center; font-size:18px; }
+      .app-sub{ text-align:center; }
+      .container{ padding:12px 12px 24px; }
+      .quick-grid,
+      .kpi-grid,
+      .result-actions{
+        grid-template-columns:1fr !important;
+      }
+      .tab{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+      }
+      .tab button{ font-size:12px; padding:10px 4px; }
+      .item-switch{ padding-top:10px; }
+      .hero-title{ font-size:20px; }
+      .hero-desc{ font-size:12px; }
+      .plan-card,.card,.preview-content-card,.compliance-card,.hero-card,.notice-card,.quick-card,.ref-type-card{
+        border-radius:16px;
+      }
+      .ref-notes-grid{ grid-template-columns:1fr 1fr; gap:8px; }
+      .ref-note-overlay-title{ font-size:14px; }
+      .note-meta{ gap:4px; }
+      .path-block .kpi-grid{ grid-template-columns:1fr !important; }
+      .matrix-grid{ grid-template-columns:1fr !important; }
+      .hero-tags span{ font-size:10px; }
+    }
+
   </style>
 </head>
 <body>
-  <div class="app">
-    <div class="top">
-      <div class="top-mini">医疗行业 · 平台专家 · 旺旺</div>
-      <div class="title">口腔KOS起号助手</div>
-      <div class="sub">GitHub Pages 前端 + Render 后端版｜按 SPU × 内容大类 × 内容切口 × 图文/视频 生成真实可用底稿</div>
-    </div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="app-title">🦷 口腔KOS起号助手</div>
+      <div class="app-sub">给口腔机构做小红书起号用的工具（正畸 / 种植牙 / 牙贴面）</div>
+      <div class="header-meta">医疗行业 · 平台专家 · 旺旺</div>
 
-    <div class="card">
-      <div class="section-title">策略选择</div>
-      <label class="label">品项</label>
-      <div class="pillbar" id="spuPills"></div>
-
-      <div class="row">
-        <div>
-          <label class="label">内容形式</label>
-          <select id="format" class="select">
-            <option value="post">图文</option>
-            <option value="video">视频</option>
-          </select>
-        </div>
-        <div>
-          <label class="label">生成目标</label>
-          <select id="goal" class="select">
-            <option value="拉咨询">拉咨询</option>
-            <option value="拉点击">拉点击</option>
-            <option value="建信任">建信任</option>
-          </select>
-        </div>
+      <div class="item-switch">
+        <button class="item-chip active" onclick="switchItem('orthodontics', this)">正畸</button>
+        <button class="item-chip" onclick="switchItem('implant', this)">种植牙</button>
+        <button class="item-chip" onclick="switchItem('veneer', this)">牙贴面</button>
       </div>
 
-      <div class="row">
-        <div>
-          <label class="label">人设</label>
-          <select id="persona" class="select">
-            <option value="医生">医生</option>
-            <option value="助理">助理</option>
-            <option value="机构号">机构号</option>
-          </select>
-        </div>
-        <div>
-          <label class="label">内容大类</label>
-          <select id="contentGroup" class="select"></select>
-        </div>
+      <div class="tab">
+        <button class="active" onclick="showTab(0)">首页</button>
+        <button onclick="showTab(1)">起号规划</button>
+        <button onclick="showTab(2)">学习参考</button>
+        <button onclick="showTab(3)">AI文案</button>
       </div>
-
-      <label class="label">内容切口</label>
-      <select id="contentAngle" class="select"></select>
-      <div id="recommendBox" class="recommend"></div>
-      <div id="comboLine" class="combo"></div>
     </div>
-
-    <div class="card">
-      <div class="section-title">内容输入</div>
-      <label class="label">用户痛点</label>
-      <textarea id="pain" class="textarea" placeholder="例如：门牙有缝，拍照特别明显，不知道要不要做贴面"></textarea>
-      <label class="label">核心卖点</label>
-      <textarea id="selling" class="textarea" placeholder="例如：会先判断适不适合，不一上来走很重的方案"></textarea>
-      <button id="generateBtn" class="button">生成内容</button>
-      <div class="deploy-note">发布前请把页面里的 <code>API_BASE</code> 改成你的 Render 地址。</div>
-    </div>
-
-    <div id="result" class="hidden"></div>
   </div>
 
-<script>
-const API_BASE = "https://kos-oral-backend-1.onrender.com";
-
-const spuOptions = {
-  "种植牙": {
-    groups: {
-      "认知破圈": ["技术差异化", "缺牙危害", "风险提醒", "传统方案误区", "判断型答疑"],
-      "转化承接": ["引流转化", "牙片帮看", "预约号位", "适合人群判断"],
-      "信任建立": ["医生人设", "医生观点", "治疗理念", "劝退型", "真实沟通记录"]
-    }
-  },
-  "牙贴面": {
-    groups: {
-      "高意向转化": ["精准症状转化", "门牙缝", "过小牙", "牙黄", "单颗修复", "不磨牙/少磨牙"],
-      "决策答疑": ["能保持多久", "会不会伤牙", "一颗能不能做", "树脂vs瓷", "适合人群", "做之前要知道什么"],
-      "医生信任": ["医生人设", "审美理念", "劝退型", "案例判断逻辑"]
-    }
-  },
-  "正畸": {
-    groups: {
-      "前置判断": ["判断型", "劝退型", "需要不需要做", "牙性/骨性判断", "严重程度判断"],
-      "审美认知": ["审美误区", "脸型vs牙齿", "嘴凸认知", "鼻基底/侧貌认知"],
-      "案例解释": ["案例解释", "变化逻辑", "深覆合", "嘴凸", "下巴后缩"]
-    }
-  }
-};
-
-let currentSpu = "种植牙";
-
-const recommendMap = {
-  "种植牙": {
-    main: "优先推荐：认知破圈 + 转化承接",
-    desc: "先用技术差异和风险判断破圈，再用牙片帮看、预约承接咨询。",
-    avoid: "不建议一上来只做纯科普。"
-  },
-  "牙贴面": {
-    main: "优先推荐：高意向转化 + 决策答疑",
-    desc: "先打具体症状词，再补 FAQ 决策答疑，最适合高意向转化。",
-    avoid: "不建议一上来写太泛的变美文案。"
-  },
-  "正畸": {
-    main: "优先推荐：前置判断 + 审美认知",
-    desc: "先帮用户判断问题，再打破认知误区，比直接讲方案更稳。",
-    avoid: "不建议一开始就重案例、重方案。"
-  }
-};
-
-function renderSpuPills(){
-  const box = document.getElementById('spuPills');
-  box.innerHTML = Object.keys(spuOptions).map(spu => `
-    <button class="pill ${spu === currentSpu ? 'active' : ''}" data-spu="${spu}">${spu}</button>
-  `).join('');
-  box.querySelectorAll('.pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentSpu = btn.dataset.spu;
-      renderSpuPills();
-      renderGroupAndAngle();
-      renderRecommend();
-      renderCombo();
-    });
-  });
-}
-
-function renderGroupAndAngle(){
-  const groupSelect = document.getElementById('contentGroup');
-  const angleSelect = document.getElementById('contentAngle');
-  const groups = spuOptions[currentSpu].groups;
-  const groupNames = Object.keys(groups);
-  groupSelect.innerHTML = groupNames.map(g => `<option value="${g}">${g}</option>`).join('');
-  angleSelect.innerHTML = groups[groupSelect.value].map(a => `<option value="${a}">${a}</option>`).join('');
-  groupSelect.onchange = () => {
-    angleSelect.innerHTML = groups[groupSelect.value].map(a => `<option value="${a}">${a}</option>`).join('');
-    renderCombo();
-  };
-  angleSelect.onchange = renderCombo;
-}
-
-function renderRecommend(){
-  const data = recommendMap[currentSpu];
-  document.getElementById('recommendBox').innerHTML = `
-    <div class="recommend-title">推荐方向</div>
-    <div class="recommend-main">${data.main}</div>
-    <div class="recommend-desc">${data.desc}</div>
-    <div class="recommend-avoid">${data.avoid}</div>
-  `;
-}
-
-function renderCombo(){
-  const format = document.getElementById('format').value === 'video' ? '视频' : '图文';
-  const goal = document.getElementById('goal').value;
-  const persona = document.getElementById('persona').value;
-  const group = document.getElementById('contentGroup').value;
-  const angle = document.getElementById('contentAngle').value;
-  document.getElementById('comboLine').innerHTML =
-    `当前会按：<b>${currentSpu}</b> × <b>${group}</b> × <b>${angle}</b> × <b>${persona}</b> × <b>${goal}</b> 生成<b>${format}</b>。`;
-}
-
-function escapeHtml(str){
-  return String(str || "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
-}
-
-async function generateContent(){
-  const payload = {
-    spu: currentSpu,
-    contentGroup: document.getElementById('contentGroup').value,
-    contentAngle: document.getElementById('contentAngle').value,
-    format: document.getElementById('format').value,
-    persona: document.getElementById('persona').value,
-    goal: document.getElementById('goal').value,
-    pain: document.getElementById('pain').value.trim(),
-    selling: document.getElementById('selling').value.trim()
-  };
-
-  const resultBox = document.getElementById('result');
-  resultBox.classList.remove('hidden');
-  resultBox.innerHTML = `
-    <div class="result-card">
-      <div class="result-title">生成中…</div>
-      <div class="result-block"><p>正在请求 AI 接口，请稍等。</p></div>
-    </div>
-  `;
-
-  try{
-    const resp = await fetch(`${API_BASE}/api/generate`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    const json = await resp.json();
-    if(!json.ok) throw new Error(json.error || 'generation_failed');
-    const data = json.data;
-
-    if(payload.format === 'video'){
-      resultBox.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">标题（3版可选）</div>
-          ${data.titles.map((t, i) => `<div class="result-block"><p><b>版本${i+1}</b>｜${escapeHtml(t)}</p></div>`).join('')}
+  <div class="app">
+    <div class="container">
+      <div id="tab0">
+        <div class="hero-card">
+          <div class="hero-badge">试用版</div>
+          <div class="hero-title">帮你从 0-1 做小红书 KOS 起号</div>
+          <div class="hero-desc">基于正畸、种植牙、牙贴面三类品项的横向对比文档，输出更适合执行的起号路径、参考内容和基础文案结构。</div>
+          <div class="hero-tags">
+            <span>起号规划</span>
+            <span>学习参考</span>
+            <span>AI文案</span>
+          </div>
         </div>
-        <div class="result-card">
-          <div class="result-title">开头3秒</div>
-          <div class="result-block"><p>${escapeHtml(data.hook)}</p></div>
+
+        <div class="quick-grid">
+          <div class="quick-card" onclick="showTab(1)">
+            <div class="quick-icon">📊</div>
+            <div class="quick-title">起号规划</div>
+            <div class="quick-desc">按品项输出最短路径、Benchmark和执行重点</div>
+          </div>
+          <div class="quick-card" onclick="showTab(2)">
+            <div class="quick-icon">📚</div>
+            <div class="quick-title">学习参考</div>
+            <div class="quick-desc">看这个品项里什么内容最容易先做起来</div>
+          </div>
+          <div class="quick-card" onclick="showTab(3)">
+            <div class="quick-icon">✍️</div>
+            <div class="quick-title">AI文案生成</div>
+            <div class="quick-desc">按品项生成更接近当前赛道的内容结构</div>
+          </div>
+          <div class="quick-card">
+            <div class="quick-icon">⚠️</div>
+            <div class="quick-title">合规提醒</div>
+            <div class="quick-desc">避免医疗营销表达踩坑，先学会正确说法</div>
+          </div>
         </div>
-        <div class="result-card">
-          <div class="result-title">视频脚本</div>
-          <div class="result-block"><p>${escapeHtml(data.script)}</p></div>
+
+        <div class="home-section">
+          <div class="section-title">推荐起号路径</div>
+          <div class="home-flow">
+            <div class="flow-item">
+              <div class="flow-num">1</div>
+              <div>
+                <div class="flow-title">先定品项</div>
+                <div class="flow-desc">先判断这次是正畸、种植牙还是牙贴面，三者打法不一样。</div>
+              </div>
+            </div>
+            <div class="flow-item">
+              <div class="flow-num">2</div>
+              <div>
+                <div class="flow-title">再看起号规划</div>
+                <div class="flow-desc">先拿到最短路径、Benchmark和本周To Do，再开始发内容。</div>
+              </div>
+            </div>
+            <div class="flow-item">
+              <div class="flow-num">3</div>
+              <div>
+                <div class="flow-title">最后去 AI 生成</div>
+                <div class="flow-desc">先写清痛点和卖点，多生成几版，选最顺的一版。</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="result-card">
-          <div class="result-title">评论区引导</div>
-          <div class="result-block"><p>${escapeHtml(data.commentCTA)}</p></div>
-        </div>
-        <div class="result-card">
-          <div class="result-title">使用提醒</div>
-          <div class="result-block"><p>${escapeHtml(data.usageNote)}</p></div>
-        </div>
-      `;
-    } else {
-      resultBox.innerHTML = `
-        <div class="result-card">
-          <div class="result-title">标题（3版可选）</div>
-          ${data.titles.map((t, i) => `<div class="result-block"><p><b>版本${i+1}</b>｜${escapeHtml(t)}</p></div>`).join('')}
-        </div>
-        <div class="result-card">
-          <div class="result-title">封面文案</div>
-          <div class="result-block"><p>${escapeHtml(data.coverText)}</p></div>
-        </div>
-        <div class="result-card">
-          <div class="result-title">正文成稿</div>
-          <div class="result-block"><p>${escapeHtml(data.body)}</p></div>
-        </div>
-        <div class="result-card">
-          <div class="result-title">评论区引导</div>
-          <div class="result-block"><p>${escapeHtml(data.commentCTA)}</p></div>
-        </div>
-        <div class="result-card">
-          <div class="result-title">使用提醒</div>
-          <div class="result-block"><p>${escapeHtml(data.usageNote)}</p></div>
-        </div>
-      `;
-    }
-  } catch(err){
-    resultBox.innerHTML = `
-      <div class="result-card">
-        <div class="result-title">生成失败</div>
-        <div class="result-block"><p>请检查 Render 后端是否已上线，并确认页面里的 API_BASE 已改成你的后端地址。</p></div>
+
       </div>
-    `;
-    console.error(err);
-  }
-}
 
-document.getElementById('format').addEventListener('change', renderCombo);
-document.getElementById('goal').addEventListener('change', renderCombo);
-document.getElementById('persona').addEventListener('change', renderCombo);
-document.getElementById('generateBtn').addEventListener('click', generateContent);
+      <div id="tab1" class="hidden">
+        <div class="ref-header">
+          <div class="ref-title">📊 起号规划</div>
+          <div class="ref-sub">输入基础配置，输出当前品项的最短起号路径和执行重点</div>
+        </div>
 
-renderSpuPills();
-renderGroupAndAngle();
-renderRecommend();
-renderCombo();
+        <div class="card">
+          <div class="form-row">
+            <label class="form-label">团队人数</label>
+            <select id="team" class="form-input">
+              <option value="3">3人</option>
+              <option value="4">4人</option>
+              <option value="5">5人</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">当前阶段</label>
+            <select id="stage" class="form-input">
+              <option value="start">刚准备起号</option>
+              <option value="traffic">已开号但没流量</option>
+              <option value="convert">有流量但没转化</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">医生是否愿意出镜</label>
+            <select id="doctorShow" class="form-input">
+              <option value="all">愿意，能稳定出镜</option>
+              <option value="some">部分愿意，偶尔出镜</option>
+              <option value="none">不愿意，尽量不出镜</option>
+            </select>
+          </div>
+          <button class="btn" onclick="generatePlannerResult()">生成方案</button>
+        </div>
+
+        <div id="plannerResult" class="plan-wrap hidden"></div>
+      </div>
+
+      <div id="tab2" class="hidden">
+        <div class="learn-head">
+          <div class="learn-title">📚 学习参考</div>
+          <div class="learn-sub">按品项查看内容类型，再参考对应代表笔记</div>
+        </div>
+
+        <div class="learn-filter-bar" id="learnFilterBar"></div>
+
+        <div class="tip">👉 看标题结构和内容类型，不要直接抄原文；标签已做脱敏处理，不显示任何留资量、成本等敏感信息。</div>
+        <div id="refList"></div>
+      </div>
+
+      <div id="tab3" class="hidden">
+        <div class="ref-header">
+          <div class="ref-title">✍️ AI文案生成</div>
+          <div class="ref-sub">按当前品项 × 内容大类 × 内容切口，直接生成更可用的图文 / 视频底稿</div>
+        </div>
+        <div class="tip">👉 这版已接入真实 API。先选策略，再补痛点和卖点，生成结果会比模板版自然很多。</div>
+
+        <div class="card">
+          <div class="form-row">
+            <label class="form-label">内容形式</label>
+            <div class="seg-wrap">
+              <button class="seg-btn active" data-mode="post" onclick="switchMode('post', this)">图文</button>
+              <button class="seg-btn" data-mode="video" onclick="switchMode('video', this)">视频脚本</button>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">生成目标</label>
+            <select id="contentGoal" class="form-input">
+              <option value="拉点击">拉点击</option>
+              <option value="拉咨询">拉咨询</option>
+              <option value="建信任">建信任</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">人设</label>
+            <select id="persona" class="form-input">
+              <option>医生</option>
+              <option>助理</option>
+              <option>机构号</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">内容大类</label>
+            <select id="contentGroup" class="form-input"></select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">内容切口</label>
+            <select id="contentAngle" class="form-input"></select>
+          </div>
+          <div id="contentTypeRecommend" class="ai-lite-card"></div>
+          <div id="comboLine" class="ai-combo-line" style="margin-top:8px;"></div>
+          <div class="form-row">
+            <label class="form-label">用户痛点</label>
+            <textarea id="pain" class="form-textarea" placeholder="如：门牙有缝很明显 / 缺牙拖很久不敢做 / 嘴凸但不想一上来走很重的方案"></textarea>
+          </div>
+          <div class="form-row">
+            <label class="form-label">核心卖点</label>
+            <textarea id="selling" class="form-textarea" placeholder="如：会先判断适不适合，不会把每个人都往同一个方向推"></textarea>
+          </div>
+          <button class="btn" id="generateBtnApi">生成内容</button>
+        </div>
+
+        <div id="aiResult" class="hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentItem = 'orthodontics';
+    let currentRefType = 'all';
+    let currentMode = 'post'; window.currentMode = 'post'; const API_BASE = 'https://kos-oral-backend-1.onrender.com';
+
+    function showTab(i){
+      document.querySelectorAll('.tab button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab button')[i].classList.add('active');
+      document.querySelectorAll('[id^=tab]').forEach(t=>t.classList.add('hidden'));
+      document.getElementById('tab'+i).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchItem(item, el){
+      currentItem = item;
+      document.querySelectorAll('.item-chip').forEach(btn=>btn.classList.remove('active'));
+      if(el) el.classList.add('active');
+
+      const planner = document.getElementById('plannerResult');
+      if(planner){ planner.classList.add('hidden'); planner.innerHTML = ''; }
+      const ai = document.getElementById('aiResult');
+      if(ai){ ai.classList.add('hidden'); ai.innerHTML = ''; }
+      renderRefs();
+    }
+
+    function getItemName(item){
+      const map = { orthodontics:'正畸', implant:'种植牙', veneer:'牙贴面' };
+      return map[item] || '正畸';
+    }
+
+    function getMainStrategy(item){
+      if(item==='orthodontics') return '助理劝退型 + 判断型内容';
+      if(item==='implant') return '技术差异化 + 直接预约引流内容';
+      if(item==='veneer') return '精准症状转化型内容';
+      return '助理劝退型 + 判断型内容';
+    }
+
+    function getAvoidStrategy(item){
+      if(item==='orthodontics') return '一上来大量科普或直接卖项目';
+      if(item==='implant') return '纯科普当投放主力';
+      if(item==='veneer') return '泛FAQ或纯促销内容';
+      return '一上来大量科普或直接卖项目';
+    }
+
+    function getSpeed(item){
+      if(item === 'orthodontics') return '慢起号（约3-5周）';
+      if(item === 'implant') return '中速起号（约3-4周）';
+      if(item === 'veneer') return '快速起号（约2-3周）';
+      return '慢起号（约3-5周）';
+    }
+
+    function getMatrix(item, team, doctorShow){
+      if(item === 'orthodontics'){
+        if(team === '3'){
+          return [
+            { role:'助理号 × 1', desc:'负责劝退式、判断型、咨询高频问题，优先起点击。' },
+            { role:'医生号 × 1', desc:'负责建立专业信任，适合讲判断逻辑、症状解释。' },
+            { role:'机构/预约号 × 1', desc:'承接咨询、发布预约说明和基础转化内容。' }
+          ];
+        }
+        if(team === '4'){
+          return [
+            { role:'助理号 × 2', desc:'一个偏冷启动，一个偏转化承接。' },
+            { role:'医生号 × 1', desc:'稳定建立信任和专业判断。' },
+            { role:'机构/预约号 × 1', desc:'统一承接咨询。' }
+          ];
+        }
+        return [
+          { role:'助理号 × 2', desc:'承担冷启动和转化前置内容。' },
+          { role:'医生号 × 1', desc:'承担信任建立。' },
+          { role:'美学号 × 1', desc:'围绕脸型、侧貌、颜值变化拉新。' },
+          { role:'机构/预约号 × 1', desc:'承接咨询。' }
+        ];
+      }
+
+      if(item === 'implant'){
+        if(doctorShow === 'none'){
+          return [
+            { role:'助理号 × 2', desc:'一个做直接预约/答疑，一个做缺牙危害/转化前置内容。' },
+            { role:'机构/预约号 × 1', desc:'承接咨询和号位预约。' }
+          ];
+        }
+        if(team === '3'){
+          return [
+            { role:'医生IP号 × 1', desc:'做技术差异化、答疑、方案理解内容。' },
+            { role:'助理号 × 1', desc:'做预约、答疑、牙片帮看等直接引流内容。' },
+            { role:'机构/预约号 × 1', desc:'承接咨询和转化。' }
+          ];
+        }
+        return [
+          { role:'医生IP号 × 1', desc:'负责技术差异化、医生价值型内容。' },
+          { role:'助理号 × 1', desc:'负责直接预约/答疑转化。' },
+          { role:'科普/痛点号 × 1', desc:'负责缺牙危害、痛点认知内容。' },
+          { role:'机构/预约号 × 1', desc:'统一承接咨询。' }
+        ];
+      }
+
+      if(team === '3'){
+        return [
+          { role:'精准症状转化号 × 1', desc:'主打牙缝大/过小牙/黄牙等高意向症状内容。' },
+          { role:'助理预约号 × 1', desc:'负责沟通温度、预约承接。' },
+          { role:'案例展示号 × 1', desc:'负责效果展示和信任补强。' }
+        ];
+      }
+      return [
+        { role:'精准症状转化号 × 1', desc:'作为主力跑量号，优先做高ROI内容。' },
+        { role:'助理预约号 × 1', desc:'做咨询承接和预约转化。' },
+        { role:'案例展示号 × 1', desc:'强化结果感和信任。' },
+        { role:'医生/美学号 × 1', desc:'补医生背书或审美专业感。' }
+      ];
+    }
+
+    function getFastPath(item){
+      if(item === 'orthodontics'){
+        return [
+          { title:'第1-2周｜冷启动', text:'每周 5-7 条。\n内容优先级：劝退式、判断型、症状科普型。\n目标：先起点击，不急转化。' },
+          { title:'第3-4周｜验证期', text:'找 3 个高点击方向，每个方向做 2-3 个变体。\n开始轻投放，每篇 200-500 测试。' },
+          { title:'第5周+｜放量期', text:'增加医生IP与案例内容，形成“点击→信任→转化”闭环。\n适合逐步加重转化内容占比。' }
+        ];
+      }
+      if(item === 'implant'){
+        return [
+          { title:'第1-2周｜冷启动期', text:'先铺内容，不急着从0投放。\n优先发资质/人设内容、缺牙危害/一定要种吗这类痛点科普、预约引流/答疑类内容。' },
+          { title:'第3-4周｜验证期', text:'开始投放。\n引流转化型内容占比提高到 50% 左右，技术差异化引流型和直接预约/答疑型同步测试。' },
+          { title:'第5周+｜规模复制期', text:'持续扩充投放池，核心爆款给足预算跑量。\n每周补 1-2 篇新测试内容，爆款老化时立刻复制 3-5 个变体。' }
+        ];
+      }
+      return [
+        { title:'第1-2周｜冷启动期', text:'目标不是慢铺内容，而是尽快找到“精准症状词 + 顾虑解除词”的爆款方向。\n精准症状转化型高频测试，FAQ 仅做 SEO 布局。' },
+        { title:'第3-8周｜验证期', text:'围绕已验证方向持续做变体。\n精准症状转化型持续跑量，效果展示型做辅助测试，医生IP内容低频维持温度。' },
+        { title:'第9周+｜规模复制期', text:'维持 2-3 篇并行跑量的精准症状内容，FAQ 继续不投放做基础内容。\n控制 Top1 依赖度，持续补新素材。' }
+      ];
+    }
+
+    function getBenchmarkByItem(item){
+      if(item === 'orthodontics'){
+        return [
+          { title:'助理运营型', desc:'以劝退式、避坑式、咨询高频问题为主，冷启动最快。', tip:'优先做“先别做牙套 / 你可能不需要矫正”这类高点击内容。' },
+          { title:'专家权威型', desc:'医生本人建立专业信任，适合做判断逻辑和知识解释。', tip:'更适合中期补信任，不适合最前面只靠纯科普跑量。' },
+          { title:'美学颜值型', desc:'围绕脸型、侧貌、E线等美学焦虑拉新。', tip:'适合已有内容基础后放大，不建议最小团队一开始多线展开。' }
+        ];
+      }
+      if(item === 'implant'){
+        return [
+          { title:'技术/概念差异化引流型', desc:'如“幸亏没做传统种植牙”“微创种牙技术优势”，引流和转化都强。', tip:'适合优先做，是种植牙最强引流模型之一。' },
+          { title:'直接预约/引流转化型', desc:'如“你发牙片，闲时帮看”“亲诊号位预约中”。', tip:'这是基础设施，最终留资几乎都离不开这类内容。' },
+          { title:'缺牙危害/痛点科普型', desc:'如“长期缺牙不种，危害是什么”“只剩残根一定要种吗”。', tip:'适合前期起认知，但预算优先级低于引流转化型。' }
+        ];
+      }
+      return [
+        { title:'精准症状转化型', desc:'如“牙缝大 + 不磨牙”“过小牙 + 单颗贴面”，是最核心主力模型。', tip:'标题必须同时包含“精准症状词 + 顾虑解除词”。' },
+        { title:'FAQ决策答疑型', desc:'回答“能不能做 / 保持多久 / 怎么选”，适合自然搜索流。', tip:'适合做 SEO 基础设施，不适合大额投放。' },
+        { title:'效果展示型', desc:'展示 Before / After，互动通常不错。', tip:'适合做信任补强，但转化效率通常不如精准症状型。' }
+      ];
+    }
+
+    function getTodoByItem(item){
+      if(item === 'orthodontics'){
+        return [
+          '本周至少发 5 条，优先保证 3 条劝退/判断型内容。',
+          '整理评论区和私信里最常见的 5 个问题，反推选题。',
+          '先找 1 个高点击方向做 2-3 个变体，不要同时铺太多线。',
+          '医生出镜内容用来补信任，不要一上来全做纯科普。'
+        ];
+      }
+      if(item === 'implant'){
+        return [
+          '先准备 5-7 条内容，覆盖“资质/人设、痛点科普、预约引流”三类。',
+          '本周至少测试 2 条技术差异化内容和 2 条预约/答疑型内容。',
+          '投放预算优先给引流转化型，科普不要做投放主力。',
+          '如果出现单条有信号内容，立刻做 3-5 个变体。'
+        ];
+      }
+      return [
+        '本周优先做 5-7 条精准症状转化型内容，不要先铺泛FAQ。',
+        '每条标题都检查是否同时包含“症状词 + 顾虑解除词”。',
+        'FAQ 内容每 3 天 1 条即可，主要用于 SEO，不做主投放。',
+        '效果展示内容每周补 1 条，用来增强信任，不替代主力转化内容。'
+      ];
+    }
+
+    function getKpiByItem(item){
+      if(item === 'orthodontics'){
+        return [
+          { label:'起号速度', value:'约3-5周' },
+          { label:'前期重点', value:'点击率' },
+          { label:'中期重点', value:'收藏/咨询' },
+          { label:'策略核心', value:'先点击后转化' }
+        ];
+      }
+      if(item === 'implant'){
+        return [
+          { label:'起号速度', value:'约3-4周' },
+          { label:'前期重点', value:'单周留资' },
+          { label:'投放重点', value:'引流转化型' },
+          { label:'风险信号', value:'Top1占比>60%' }
+        ];
+      }
+      return [
+        { label:'起号速度', value:'约2-3周' },
+        { label:'前期重点', value:'爆款方向' },
+        { label:'主力模型', value:'精准症状型' },
+        { label:'风险信号', value:'FAQ投太多' }
+      ];
+    }
+
+    function getRiskTips(item, doctorShow){
+      const common = [
+        '不要使用“保证效果、100%改善、最低价、最好”等绝对化表述。',
+        '医生出镜建议西装、衬衫、便服，不建议白大褂/洗手服做主画面。'
+      ];
+      if(item === 'orthodontics') common.unshift('正畸前期不要急着强转化，过早卖项目容易压低账号点击。');
+      if(item === 'implant') common.unshift('种植牙不要把纯科普当投放主力，预算优先给引流转化型和技术差异化内容。');
+      if(item === 'veneer') common.unshift('牙贴面不要用泛FAQ和纯促销做主投放，高ROI通常来自精准症状转化型。');
+      if(doctorShow === 'none') common.push('医生不出镜时，不要硬装医生口吻，更适合助理/机构解释视角。');
+      return common;
+    }
+
+    function generatePlannerResult(){
+      const team = document.getElementById('team')?.value || '3';
+      const stage = document.getElementById('stage')?.value || 'start';
+      const doctorShow = document.getElementById('doctorShow')?.value || 'some';
+      const item = currentItem || 'orthodontics';
+      const itemName = getItemName(item);
+      const speed = getSpeed(item);
+      const matrix = getMatrix(item, team, doctorShow);
+      const fastPath = getFastPath(item);
+      const benchmark = getBenchmarkByItem(item);
+      const todos = getTodoByItem(item, stage);
+      const kpis = getKpiByItem(item);
+      const risks = getRiskTips(item, doctorShow);
+
+      const html = `
+        <div class="plan-card">
+          <div class="plan-title">结论（直接照做）</div>
+          <div class="todo-item">
+            当前更适合优先做：<b>${getMainStrategy(item)}</b><br><br>
+            不建议优先做：${getAvoidStrategy(item)}
+          </div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-highlight">🚀 当前品项最短起号路径 <span class="speed-chip">${speed}</span></div>
+          <div class="plan-title">${itemName}｜推荐账号矩阵</div>
+          <div class="matrix-grid">
+            ${matrix.map(m => `
+              <div class="matrix-item">
+                <div class="matrix-role">${m.role}</div>
+                <div class="matrix-desc">${m.desc}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-title">0-1最短起号路径</div>
+          ${fastPath.map(p => `
+            <div class="path-block" style="margin-bottom:8px;">
+              <div class="path-title">${p.title}</div>
+              <div class="path-text">${p.text}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-title">Benchmark参考</div>
+          <div class="plan-subtitle">先选 1 个模型打爆，不要一上来同时做三种</div>
+          <div class="benchmark-list">
+            ${benchmark.map(b => `
+              <div class="benchmark-item">
+                <div class="bm-title">${b.title}</div>
+                <div class="bm-desc">${b.desc}</div>
+                <div class="bm-tip">👉 ${b.tip}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-title">本周 To Do</div>
+          <div class="todo-list">
+            ${todos.map(t => `<div class="todo-item">${t}</div>`).join('')}
+          </div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-title">当前重点 KPI</div>
+          <div class="kpi-grid">
+            ${kpis.map(k => `
+              <div class="kpi-item">
+                <div class="kpi-label">${k.label}</div>
+                <div class="kpi-value">${k.value}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-title">风险提醒</div>
+          <div class="tip-list">
+            ${risks.map(r => `<div class="tip-item">${r}</div>`).join('')}
+          </div>
+        </div>
+      `;
+
+      const box = document.getElementById('plannerResult');
+      box.innerHTML = html;
+      box.classList.remove('hidden');
+      box.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
+    function switchRefType(type, el){
+      currentRefType = type;
+      document.querySelectorAll('#tab2 .filter-btn').forEach(b=>b.classList.remove('active'));
+      if(el) el.classList.add('active');
+      renderRefs();
+    }
+
+    function getRefsByItem(){
+      if(currentItem === 'orthodontics'){
+        return [
+          {type:'assistant',title:'助理劝退型',desc:'以“先别做牙套 / 你可能不需要矫正”为核心，优先拿点击。',stage:'冷启动'},
+          {type:'doctor',title:'医生判断型',desc:'围绕“你需不需要矫正 / 什么情况更适合”，建立信任。',stage:'验证期'},
+          {type:'convert',title:'美学改善型',desc:'围绕脸型、侧貌、变化感，适合后期放大拉新。',stage:'放量期'}
+        ];
+      }
+      if(currentItem === 'implant'){
+        return [
+          {type:'convert',title:'直接预约/引流转化型',desc:'如“你发牙片我帮你看”“亲诊号位预约中”，是基础设施。',stage:'全阶段'},
+          {type:'doctor',title:'技术差异化引流型',desc:'如“幸亏没做传统种植牙”“微创种牙技术优势”。',stage:'验证期'},
+          {type:'assistant',title:'缺牙危害科普型',desc:'如“长期缺牙不种，危害是什么”，适合前期起认知。',stage:'冷启动'}
+        ];
+      }
+      return [
+        {type:'convert',title:'精准症状转化型',desc:'如“牙缝大 + 不磨牙”“过小牙 + 单颗贴面”，是主力模型。',stage:'全阶段'},
+        {type:'assistant',title:'FAQ决策答疑型',desc:'回答“适不适合 / 能不能做 / 保持多久”，适合自然搜索。',stage:'冷启动'},
+        {type:'doctor',title:'效果展示型',desc:'Before/After 内容，适合做信任补强。',stage:'验证期'}
+      ];
+    }
+
+    function renderRefs(){
+      const list = getRefsByItem();
+      const filtered = currentRefType === 'all' ? list : list.filter(i=>i.type === currentRefType);
+      document.getElementById('refList').innerHTML = filtered.map(item => `
+        <div class="ref-card">
+          <div class="ref-card-top">
+            <span class="ref-badge">${item.stage}</span>
+            <span class="ref-badge">${getTypeName(item.type)}</span>
+          </div>
+          <div class="ref-title-sm">${item.title}</div>
+          <div class="ref-desc">${item.desc}</div>
+          <div class="ref-meta">当前品项：${getItemName(currentItem)}</div>
+        </div>
+      `).join('');
+    }
+
+    function getTypeName(type){
+      const map = { doctor:'医生型', assistant:'助理型', convert:'转化型', all:'全部' };
+      return map[type] || type;
+    }
+
+    function switchMode(mode, el){
+      currentMode = mode;
+      document.querySelectorAll('.seg-btn').forEach(btn=>btn.classList.remove('active'));
+      if(el) el.classList.add('active');
+    }
+
+    function generateAI(){
+      const payload = {
+        spu: getItemName(currentItem),
+        contentGroup: document.getElementById('contentGroup')?.value || '',
+        contentAngle: document.getElementById('contentAngle')?.value || '',
+        format: currentMode === 'video' ? 'video' : 'post',
+        persona: document.getElementById('persona')?.value || '助理',
+        goal: document.getElementById('contentGoal')?.value || '拉点击',
+        pain: (document.getElementById('pain')?.value || '').trim(),
+        selling: (document.getElementById('selling')?.value || '').trim()
+      };
+      const box = document.getElementById('aiResult');
+      box.classList.remove('hidden');
+      box.innerHTML = `<div class="preview-wrap"><div class="preview-shell"><div class="preview-shell-head"><div><div class="preview-shell-title">生成中…</div><div class="preview-shell-sub">正在请求 AI 接口，请稍等</div></div></div><div class="preview-content-card"><div class="preview-body">如果 Render 休眠了，第一次请求可能会慢一点。</div></div></div></div>`;
+
+      fetch(`${API_BASE}/api/generate`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      })
+      .then(r => r.json())
+      .then(json => {
+        if(!json.ok) throw new Error(json.message || json.error || 'generation_failed');
+        const data = json.data;
+        const titleBlocks = (data.titles || []).map((t,i)=>`<div class="preview-title-item"><b>版本${i+1}</b>｜${escapeHtml(t)}</div>`).join('');
+        if(payload.format === 'video'){
+          box.innerHTML = `
+            <div class="preview-wrap">
+              <div class="preview-shell">
+                <div class="preview-shell-head">
+                  <div>
+                    <div class="preview-shell-title">AI 视频脚本</div>
+                    <div class="preview-shell-sub">${escapeHtml(payload.spu)} × ${escapeHtml(payload.contentGroup)} × ${escapeHtml(payload.contentAngle)}</div>
+                  </div>
+                </div>
+                <div class="preview-content-card"><div class="preview-section-title">标题（3版可选）</div>${titleBlocks}</div>
+                <div class="preview-content-card"><div class="preview-section-title">开头3秒</div><div class="preview-body">${escapeHtml(data.hook || '')}</div></div>
+                <div class="preview-content-card"><div class="preview-section-title">视频脚本</div><div class="preview-body">${escapeHtml(data.script || '')}</div></div>
+                <div class="preview-content-card"><div class="preview-section-title">评论区引导</div><div class="preview-comment">${escapeHtml(data.commentCTA || '')}</div></div>
+                <div class="preview-content-card"><div class="preview-section-title">使用提醒</div><div class="preview-body">${escapeHtml(data.usageNote || '')}</div></div>
+              </div>
+            </div>`;
+        } else {
+          box.innerHTML = `
+            <div class="preview-wrap">
+              <div class="preview-shell">
+                <div class="preview-shell-head">
+                  <div>
+                    <div class="preview-shell-title">AI 图文成稿</div>
+                    <div class="preview-shell-sub">${escapeHtml(payload.spu)} × ${escapeHtml(payload.contentGroup)} × ${escapeHtml(payload.contentAngle)}</div>
+                  </div>
+                </div>
+                <div class="preview-content-card"><div class="preview-section-title">标题（3版可选）</div>${titleBlocks}</div>
+                <div class="preview-content-card"><div class="preview-section-title">封面文案</div><div class="preview-body">${escapeHtml(data.coverText || '')}</div></div>
+                <div class="preview-content-card"><div class="preview-section-title">正文成稿</div><div class="preview-body">${escapeHtml(data.body || '')}</div></div>
+                <div class="preview-content-card"><div class="preview-section-title">评论区引导</div><div class="preview-comment">${escapeHtml(data.commentCTA || '')}</div></div>
+                <div class="preview-content-card"><div class="preview-section-title">使用提醒</div><div class="preview-body">${escapeHtml(data.usageNote || '')}</div></div>
+              </div>
+            </div>`;
+        }
+      })
+      .catch(err => {
+        box.innerHTML = `<div class="preview-wrap"><div class="preview-shell"><div class="preview-shell-head"><div><div class="preview-shell-title">生成失败</div><div class="preview-shell-sub">接口已连通，但本次返回异常</div></div></div><div class="preview-content-card"><div class="preview-body">${escapeHtml(err.message || 'generation_failed')}</div></div></div></div>`;
+        console.error(err);
+      });
+    }
+
+    function getDefaultPain(item){
+      if(item === 'orthodontics') return '嘴凸但不确定要不要做矫正';
+      if(item === 'implant') return '缺牙拖了很久，不知道现在还适不适合种';
+      return '牙缝大又担心做贴面会磨牙';
+    }
+    function getDefaultSelling(item){
+      if(item === 'orthodontics') return '先判断适不适合，再讲方案和变化';
+      if(item === 'implant') return '先解释技术差异和适合人群，再给建议';
+      return '先看是否适合，再看能不能做到不磨牙或尽量少磨牙';
+    }
+
+    function buildPreviewShell(coverType, persona, emoji, coverTitle, coverSub, titlesHtml, bodyHtml, extraHtml){
+      return `
+        <div class="ai-preview">
+          <div class="preview-phone">
+            <div class="preview-cover">
+              <div class="preview-cover-top">
+                <span class="preview-badge">${coverType}</span>
+                <span class="preview-badge">${persona}</span>
+              </div>
+              <div class="preview-emoji">${emoji}</div>
+              <div class="preview-cover-text">
+                <div class="preview-cover-title">${coverTitle}</div>
+                <div class="preview-cover-sub">${coverSub}</div>
+              </div>
+            </div>
+            <div class="preview-meta">
+              <div class="preview-author">
+                <span class="preview-avatar"></span>
+                <span class="preview-author-name">${getItemName(currentItem)} · ${persona}视角</span>
+              </div>
+              <div class="preview-action">预览效果</div>
+            </div>
+          </div>
+          <div class="preview-content-card">
+            <div class="preview-section-title">标题（3版可选）</div>
+            <div class="preview-title-list">${titlesHtml}</div>
+          </div>
+          ${bodyHtml}
+          ${extraHtml}
+          <div class="compliance-card">
+            <div class="preview-section-title">合规提醒</div>
+            <div class="compliance-list">
+              <div class="compliance-line">避免“保证效果、100%改善、最低价、最好”等绝对化表达。</div>
+              <div class="compliance-line">医生出镜建议西装、衬衫、便服，不建议白大褂、洗手服场景。</div>
+              <div class="compliance-line">先讲判断逻辑、经验分享、风险提醒，不要把个体结果说成普遍结果。</div>
+            </div>
+          </div>
+          <div class="result-actions">
+            <button class="soft-btn" onclick="copyAIResult()">复制本次结果</button>
+            <button class="soft-btn" onclick="scrollToTopSafe()">回到顶部</button>
+          </div>
+        </div>
+      `;
+    }
+
+    
+    function shortPain(raw){
+      const text = String(raw || '').trim();
+      if(!text) return '这个问题';
+      const map = [
+        [/缺牙|掉牙|少牙/, '缺牙'],
+        [/拖.*久|很多年/, '缺牙拖很久'],
+        [/怕疼/, '怕疼'],
+        [/恢复慢/, '怕恢复慢'],
+        [/门牙.*缝|牙缝/, '门牙有缝'],
+        [/过小牙/, '过小牙'],
+        [/牙黄|发黄/, '牙黄'],
+        [/嘴凸/, '嘴凸'],
+        [/深覆合|下牙.*看不见/, '深覆合'],
+        [/怕伤牙/, '怕伤牙']
+      ];
+      for(const [re, out] of map){
+        if(re.test(text)) return out;
+      }
+      return text.slice(0, 8);
+    }
+
+    function implantTitleSet(pain, persona){
+      const p = shortPain(pain);
+      return [
+        `幸亏没急着按老办法做，${p}的人先看`,
+        `${p}，先别急着做决定`,
+        persona === '医生' ? `很多人拖着${p}，第一步就判断错了` : `${p}，可以先把情况弄清楚再说`
+      ];
+    }
+
+    function veneerTitleSet(pain, persona){
+      const p = shortPain(pain);
+      return [
+        `${p}，很多人第一步就选重了`,
+        `${p}，不一定要走最重那条路`,
+        persona === '医生' ? `遇到${p}，我一般不会先劝你做` : `${p}，先看适不适合再往下说`
+      ];
+    }
+
+    function orthoTitleSet(pain, persona){
+      const p = shortPain(pain);
+      return [
+        `${p}，很多人第一步就判断错了`,
+        `${p}，先别急着问怎么做`,
+        persona === '医生' ? `关于${p}，我一般先讲判断` : `${p}，先把情况分清楚再决定`
+      ];
+    }
+
+function titlesToHtml(titles){ return titles.map((t,i) => `<div class="preview-title-item"><b>版本${i+1}</b>｜${escapeHtml(t)}</div>`).join(''); }
+
+    
+    function buildOrthoPost(pain,selling,persona){
+      const titles = orthoTitleSet(pain, persona);
+      const body = `
+        <div class="preview-content-card">
+          <div class="preview-section-title">正文预览</div>
+          <div class="preview-body">很多人一来问正畸，第一句话就是：我这种情况到底要不要做。\n\n但这件事往往问早了。正畸更重要的不是先选方式，而是先分清楚：你看到的问题，到底是不是那个问题。\n\n${selling}\n\n先判断，再决定，通常会比急着做更稳。</div>
+        </div>
+        <div class="preview-content-card">
+          <div class="preview-section-title">评论区引导</div>
+          <div class="preview-comment">你现在更纠结的是要不要做，还是分不清自己到底是什么问题？可以留言说说。</div>
+        </div>`;
+      return buildPreviewShell('判断 / 劝退型', persona, '🦷', '先判断\n再决定', '正畸更适合先起点击，再补信任', titlesToHtml(titles), body, '');
+    }
+
+
+    
+    function buildImplantPost(pain,selling,persona){
+      const titles = implantTitleSet(pain, persona);
+      const body = `
+        <div class="preview-content-card">
+          <div class="preview-section-title">正文预览</div>
+          <div class="preview-body">很多人缺牙后一直拖着，越拖越不敢看。\n\n但真正更重要的，不是立刻选方案，而是先把自己的情况判断清楚。尤其是像“怕疼、怕恢复慢、怕做错”这种顾虑，越不能一上来就急着做决定。\n\n${selling}\n\n先看清楚，再决定下一步，通常会稳很多。</div>
+        </div>
+        <div class="preview-content-card">
+          <div class="preview-section-title">评论区引导</div>
+          <div class="preview-comment">如果你也在纠结现在还适不适合处理，可以把你的情况说具体一点。</div>
+        </div>`;
+      return buildPreviewShell('技术差异 / 引流型', persona, '🦷', '缺牙别拖\n先看这件事', '种植牙更适合先打引流和技术差异', titlesToHtml(titles), body, '');
+    }
+
+
+    
+    function buildVeneerPost(pain,selling,persona){
+      const titles = veneerTitleSet(pain, persona);
+      const body = `
+        <div class="preview-content-card">
+          <div class="preview-section-title">正文预览</div>
+          <div class="preview-body">很多人因为 ${pain} 想做贴面，但真正最担心的，通常不是做不做，而是会不会伤牙、会不会做得太重、会不会不自然。\n\n所以这类问题最重要的，不是上来就给答案，而是先判断你到底适不适合。\n\n${selling}\n\n先把边界讲清楚，再往下说，通常会更自然。</div>
+        </div>
+        <div class="preview-content-card">
+          <div class="preview-section-title">评论区引导</div>
+          <div class="preview-comment">你更在意的是颜色、形态，还是会不会磨牙？可以留言说说你的情况。</div>
+        </div>`;
+      return buildPreviewShell('精准症状转化型', persona, '✨', '症状明确\n再讲解法', '牙贴面更适合直接打高意向症状内容', titlesToHtml(titles), body, '');
+    }
+
+
+    
+    function buildOrthoVideo(pain,selling,persona){
+      const titles = orthoTitleSet(pain, persona);
+      const shots = [
+        { title:'镜头1｜开头钩子', text:`画面：${persona}正对镜头，日常服。\n台词：${titles[0]}。` },
+        { title:'镜头2｜问题解释', text:`画面：字幕出现“先判断 / 再决定”。\n台词：很多人一上来就问怎么做，但正畸更重要的是先分清楚自己到底是什么问题。` },
+        { title:'镜头3｜给出建议', text:`画面：手势说明。\n台词：${selling}。先把情况看明白，再决定下一步，会稳很多。` }
+      ];
+      return buildVideoShell('判断 / 劝退型', persona, '🎬', '先判断\n再决定', titles, shots);
+    }
+
+
+    
+    function buildImplantVideo(pain,selling,persona){
+      const titles = implantTitleSet(pain, persona);
+      const shots = [
+        { title:'镜头1｜开头钩子', text:`画面：${persona}正对镜头，日常服。\n台词：${titles[0]}。` },
+        { title:'镜头2｜问题解释', text:`画面：字幕关键词“先判断 / 别急着做决定”。\n台词：很多人缺牙以后就一直拖着，但越是拖得久，越不能只听一个通用答案。` },
+        { title:'镜头3｜自然带出卖点', text:`画面：像聊天一样。\n台词：${selling}，所以更建议先把情况讲清楚，再决定下一步。` }
+      ];
+      return buildVideoShell('技术差异 / 引流型', persona, '🎬', '缺牙别拖\n先看判断', titles, shots);
+    }
+
+
+    
+    function buildVeneerVideo(pain,selling,persona){
+      const titles = veneerTitleSet(pain, persona);
+      const shots = [
+        { title:'镜头1｜开头钩子', text:`画面：${persona}正对镜头。\n台词：${titles[0]}。` },
+        { title:'镜头2｜问题解释', text:`画面：字幕“先判断适不适合”。\n台词：很多人一想到贴面，就会先担心会不会伤牙、会不会不自然。其实这类情况更重要的是先判断适不适合。` },
+        { title:'镜头3｜自然带出卖点', text:`画面：轻松讲解。\n台词：${selling}，所以更建议先看适不适合，再往下讲怎么做。` }
+      ];
+      return buildVideoShell('精准症状转化型', persona, '🎬', '症状明确\n再讲解法', titles, shots);
+    }
+
+
+    function buildVideoShell(coverType, persona, emoji, coverTitle, titles, shots){
+      const body = `
+        <div class="preview-content-card">
+          <div class="preview-section-title">分镜脚本</div>
+          <div class="script-list">
+            ${shots.map(item => `<div class="script-card"><div class="script-shot">${item.title}</div><div class="script-text">${escapeHtml(item.text)}</div></div>`).join('')}
+          </div>
+        </div>`;
+      return buildPreviewShell(coverType, persona, emoji, coverTitle, '更适合口播表达', titlesToHtml(titles), body, '');
+    }
+
+    function copyAIResult(){
+      const node = document.getElementById('aiResult');
+      const text = node ? node.innerText.trim() : '';
+      if(!text){ alert('当前没有可复制内容'); return; }
+      navigator.clipboard.writeText(text).then(()=>alert('已复制')).catch(()=>alert('复制失败，请手动复制'));
+    }
+    function scrollToTopSafe(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function escapeHtml(str){ return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
+
+
+    let currentLearnFilter = 'all';
+    function setLearnFilter(filter, el){
+      currentLearnFilter = filter;
+      document.querySelectorAll('.learn-filter-btn').forEach(btn => btn.classList.remove('active'));
+      if(el) el.classList.add('active');
+      renderRefs();
+    }
+    function matchLearnFilter(section){
+      if(currentLearnFilter === 'all') return true;
+      return (section.filters || []).includes(currentLearnFilter);
+    }
+    function normalizeXhsLink(link){
+      if(!link) return '';
+      if(link.startsWith('http://') || link.startsWith('https://')) return link;
+      if(link.startsWith('/explore/') || link.startsWith('/discovery/item/')) return 'https://www.xiaohongshu.com' + link;
+      return link;
+    }
+    function getRulesByItem(){
+      if(currentItem === 'implant') return [
+        '引流转化型内容是基础设施，必须稳定产出。',
+        '技术差异化内容最容易起量，是破圈关键。',
+        '科普内容适合做SEO，不适合重投。',
+        '医生IP内容用于补信任，不承担主要转化。'
+      ];
+      if(currentItem === 'veneer') return [
+        '精准症状转化型优先级最高，是主力内容。',
+        'FAQ是基础内容，不是投放主力。',
+        '效果展示互动高，但转化通常不如精准症状型。',
+        '促销型内容普遍较弱，不适合作为主打法。'
+      ];
+      return [
+        '判断型内容用于筛选用户认知，建立基础理解。',
+        '劝退型内容更容易拿点击，适合冷启动。',
+        '医生IP用于建立长期信任，不适合单独承担转化。',
+        '内容节奏和稳定更新比单条爆款更重要。'
+      ];
+    }
+    function getMistakesByItem(){
+      if(currentItem === 'implant') return [
+        '只做科普内容，不做引流转化内容。',
+        '内容还没铺好就大预算重投。',
+        '过度强调技术名词，用户无法快速理解。'
+      ];
+      if(currentItem === 'veneer') return [
+        '一上来重投FAQ或促销内容。',
+        '忽略精准症状转化型，过度依赖案例展示。',
+        '只有好看案例，没有明确结构和切题逻辑。'
+      ];
+      return [
+        '只讲专业，不讲用户感受和判断逻辑。',
+        '内容没有节奏，想到什么发什么。',
+        '还没建立信任就急着做强转化。'
+      ];
+    }
+    function getContentTypesByItem(){
+      if(currentItem === 'orthodontics'){
+        return [
+          {
+            title:'劝退式 / 避坑型',
+            desc:'用“先别做”“不要急着做”这类切入抢点击，适合冷启动建立停留和兴趣。',
+            meta:'适合阶段：冷启动',
+            role:'主力内容',
+            strength:'表现：强点击 / 中信任',
+            warning:'注意：适合起量，不适合单独承担后续转化。',
+            filters:['cold_start','main'],
+            notes:[
+              {
+                title:'为什么我宁愿限号，也要保证面诊时长？',
+                cover:'http://sns-img-qn.xhscdn.com/notes_pre_post/1040g3k831trkmbq8gc005q9403nc9usi8sjtms0?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/69ba52e4000000002200cc93',
+                tag:'正畸医生',
+                structure:'医生信任型',
+                level:'中信任 / 强点击',
+                phase:'冷启动',
+                role:'主力内容',
+                top:true
+              }
+            ]
+          },
+          {
+            title:'判断型 / 自测型',
+            desc:'围绕“适不适合矫正”“这类问题到底是不是骨性/牙性”帮助用户做初步判断。',
+            meta:'适合阶段：冷启动-验证期',
+            role:'主力内容',
+            strength:'表现：中引流 / 中信任',
+            warning:'注意：更适合建立专业判断，不要写成太学术的知识说明。',
+            filters:['cold_start','main'],
+            notes:[
+              {
+                title:'骨性嘴凸可以用控根内收调整吗？',
+                cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31rr2pg1f22105q11jt9injgpce2l94g?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/69783616000000001a0271fc',
+                tag:'正畸判断型',
+                structure:'判断型',
+                level:'中引流 / 中信任',
+                phase:'冷启动 / 验证期',
+                role:'主力内容',
+                top:true
+              },
+              {
+                title:'为什么大部分嘴凸会有鼻基底凹陷的情况?',
+                cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031t8a5tpbme005pd53o20s6a6k79jmb8?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/69a686f40000000022039e19',
+                tag:'正畸判断型',
+                structure:'判断型',
+                level:'中引流',
+                phase:'验证期',
+                role:'主力内容'
+              }
+            ]
+          },
+          {
+            title:'案例型 / 结果解释型',
+            desc:'用典型问题和结果变化做承接，更适合在已有点击和认知基础上补强信任。',
+            meta:'适合阶段：验证期-放量期',
+            role:'辅助内容',
+            strength:'表现：中信任 / 中承接',
+            warning:'注意：更适合补足结果理解，不建议冷启动阶段单独依赖。',
+            filters:['main'],
+            notes:[
+              {
+                title:'下牙完全看不见？深覆合覆盖矫正一定要看！',
+                cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031sd2n5fb5e005pd53o20s6a65e2727g?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/698aa42f000000001d013baa',
+                tag:'正畸案例型',
+                structure:'案例型',
+                level:'中信任',
+                phase:'验证期 / 放量期',
+                role:'辅助内容'
+              }
+            ]
+          }
+        ];
+      }
+      if(currentItem === 'implant'){
+        return [
+          {
+            title:'技术 / 概念差异化引流型',
+            desc:'以“新技术 / 对比传统 / 幸亏没做”为核心，强引流、强互动、强转化。',
+            meta:'适合阶段：验证期-放量期',
+            role:'主力内容',
+            strength:'表现：强引流 / 强转化',
+            warning:'注意：不要过度堆技术名词，用户要先看懂问题和差异。',
+            filters:['strong_traffic','strong_convert','main'],
+            notes:[
+              {
+                title:'牙齿缺失新技术！幸亏没做传统种植牙！',
+                cover:'http://sns-img-qn.xhscdn.com/1040g2sg31pj7i5j4kmkg5q7taq1ttbs2gvbaggo?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/69201535000000001e036da9',
+                tag:'上海种植牙于淞',
+                structure:'技术差异化',
+                level:'强引流 / 强转化',
+                phase:'验证期 / 放量期',
+                role:'主力内容',
+                top:true
+              },
+              {
+                title:'牙齿缺失好消息！无需磨牙！ACM种植新技术',
+                cover:'http://sns-img-qn.xhscdn.com/1040g2sg31rls5ic532605q7taq1ttbs2migops0?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/6972e14d000000001a021d62',
+                tag:'上海种植牙于淞',
+                structure:'技术差异化',
+                level:'强引流',
+                phase:'验证期',
+                role:'主力内容'
+              },
+              {
+                title:'微创种牙技术的优势是什么？',
+                cover:'http://sns-img-qn.xhscdn.com/1040g00831k7s7kv12o005pd5tl5i2sp5qam37k0?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/687f2ba9000000002001a7fc',
+                tag:'常州种植牙肖企文',
+                structure:'技术差异化',
+                level:'中引流',
+                phase:'验证期',
+                role:'辅助内容'
+              }
+            ]
+          },
+          {
+            title:'直接预约 / 引流转化型',
+            desc:'以“预约 / 号位 / 牙片帮看 / 答疑”为核心，是种植牙留资基础设施。',
+            meta:'适合阶段：全阶段',
+            role:'基础设施',
+            strength:'表现：高转化 / 稳定承接',
+            warning:'注意：不能只有这类内容，前面仍需要内容铺垫和信任支撑。',
+            filters:['strong_convert','infra','main'],
+            notes:[
+              {
+                title:'成都种植牙|欧国敏教授亲诊号位开放预约中',
+                cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031u88gk8bhs005q4tkldma757keia7po?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/694e4eb0000000001e00f70e',
+                tag:'欧国敏种植小助理',
+                structure:'引流转化',
+                level:'高转化',
+                phase:'全阶段',
+                role:'基础设施',
+                top:true
+              },
+              {
+                title:'成都种植牙： 华西团队公益面诊开放中！',
+                cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31qlv4mebn0105q8li91s665p8pjmqbg?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/6922d8d0000000001e009683',
+                tag:'欧国敏种植小助理',
+                structure:'引流转化',
+                level:'中转化',
+                phase:'全阶段',
+                role:'基础设施'
+              },
+              {
+                title:'合肥种植牙，你发牙片，闲时帮看',
+                cover:'http://sns-img-qn.xhscdn.com/notes_pre_post/1040g3k831pa9fu7sjcdg5pcec65og6aosvfce4g?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/69257c01000000001f007d76',
+                tag:'合肥种植牙秦历',
+                structure:'引流转化',
+                level:'高转化',
+                phase:'全阶段',
+                role:'基础设施',
+                top:true
+              },
+              {
+                title:'武汉种植牙特惠ing！可用医保超划算',
+                cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031r2p5mo6gm005q0s96244v1vpdps4e0?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/695cbe79000000002203386f',
+                tag:'胡建教授助理',
+                structure:'引流转化',
+                level:'中转化',
+                phase:'验证期',
+                role:'基础设施'
+              }
+            ]
+          },
+          {
+            title:'种植牙知识科普型',
+            desc:'解释概念、流程、选择方法，适合做SEO积累，不适合作为投放主力。',
+            meta:'适合阶段：冷启动',
+            role:'辅助内容',
+            strength:'表现：中引流 / 低直接转化',
+            warning:'注意：更适合自然流和SEO，不适合重投。',
+            filters:['cold_start','overrated'],
+            notes:[
+              {
+                title:'长期缺牙不种的危害是什么？',
+                cover:'http://sns-img-qn.xhscdn.com/1040g2sg31kg1og3piol05pd5tl5i2sp5cishs48?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/688789ac000000001d00f043',
+                tag:'常州种植牙肖企文',
+                structure:'风险提醒',
+                level:'中引流',
+                phase:'冷启动',
+                role:'辅助内容'
+              },
+              {
+                title:'为什么90％人种的都是6号牙？一定要种吗？',
+                cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31pun73tjlu905q0s96244v1vmv4np6g?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/693a669b000000001e015e49',
+                tag:'胡建教授助理',
+                structure:'科普型',
+                level:'中引流',
+                phase:'冷启动',
+                role:'辅助内容'
+              },
+              {
+                title:'牙齿只剩残根了，一定要种牙吗？',
+                cover:'http://sns-img-qn.xhscdn.com/1040g2sg31o3k8hjol8e05pcec65og6ao3le8p0g?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/68fde4500000000004000846',
+                tag:'合肥种植牙秦历',
+                structure:'科普型',
+                level:'中引流',
+                phase:'冷启动',
+                role:'辅助内容'
+              }
+            ]
+          },
+          {
+            title:'医生IP / 人设型',
+            desc:'用医生视角、真心话、劝退、故事型内容建立信任，适合中长期内容积淀。',
+            meta:'适合阶段：冷启动-验证期',
+            role:'信任补强',
+            strength:'表现：中引流 / 中信任',
+            warning:'注意：适合补信任，不承担主要转化。',
+            filters:['cold_start'],
+            notes:[
+              {
+                title:'缺牙想种牙，心里害怕怎么办？',
+                cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31q1c9uku72f05q7taq1ttbs20ek7uug?imageView2/2/w/540/format/jpg/q/75',
+                link:'/discovery/item/693d2338000000001e006a66',
+                tag:'上海种植牙于淞',
+                structure:'医生信任型',
+                level:'中信任',
+                phase:'冷启动 / 验证期',
+                role:'信任补强'
+              }
+            ]
+          }
+        ];
+      }
+      return [
+        {
+          title:'精准症状转化型',
+          desc:'以“精准症状词 + 顾虑解除词”为核心，是牙贴面赛道最重要的主力模型。',
+          meta:'适合阶段：全阶段',
+          role:'主力内容',
+          strength:'表现：强转化 / 强意向',
+          warning:'注意：优先级最高，但要尽量用更具体的症状词，不要写得太泛。',
+          filters:['strong_convert','main'],
+          notes:[
+            {
+              title:'门牙缝隙大好尴尬？选微贴！',
+              cover:'http://sns-img-qn.xhscdn.com/1040g00831rq2lquo2m0g5phb8cm0u1ia1kebp7g?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/696ee02000000000220095e0',
+              tag:'刘予颀',
+              structure:'精准症状',
+              level:'强转化',
+              phase:'全阶段',
+              role:'主力内容',
+              top:true
+            },
+            {
+              title:'19年深耕贴面美学，拒绝❌伤牙、模板、套路',
+              cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031rhvk5sa6u005qapp50qrneqob4eqno?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/696700ff000000000c03594b',
+              tag:'王中亮',
+              structure:'精准症状',
+              level:'强转化 / 中信任',
+              phase:'验证期 / 放量期',
+              role:'主力内容',
+              top:true
+            },
+            {
+              title:'“天生”过小牙，不磨牙，单颗瓷贴面！',
+              cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31ovvurhk26105q3e4gj79bp7iae6ns8?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/691af24400000000040170f2',
+              tag:'郭瑾婷',
+              structure:'精准症状',
+              level:'强转化',
+              phase:'全阶段',
+              role:'主力内容'
+            }
+          ]
+        },
+        {
+          title:'FAQ决策答疑型',
+          desc:'回答“能不能做 / 保持多久 / 怎么选”等高频问题，适合作为SEO基础设施。',
+          meta:'适合阶段：冷启动',
+          role:'基础设施',
+          strength:'表现：中引流 / 低直接转化',
+          warning:'注意：适合自然搜索流，不适合重投，容易被误当主力内容。',
+          filters:['cold_start','infra','overrated'],
+          notes:[
+            {
+              title:'这五类人做牙贴面超级适合',
+              cover:'',
+              link:'',
+              tag:'FAQ',
+              structure:'FAQ型',
+              level:'中引流',
+              phase:'冷启动',
+              role:'基础设施'
+            }
+          ]
+        },
+        {
+          title:'效果展示型',
+          desc:'以前后对比、真实案例来建立信任，互动通常不错，但转化通常不如精准症状型。',
+          meta:'适合阶段：验证期-放量期',
+          role:'辅助内容',
+          strength:'表现：中信任 / 中互动',
+          warning:'注意：容易被高估，适合作为辅助，不宜代替精准症状型。',
+          filters:['overrated'],
+          notes:[
+            {
+              title:'进来看 0.1mm 牙贴面到底有！多！薄！',
+              cover:'http://sns-img-qn.xhscdn.com/1040g2sg31qab7go5gcjg5q804mqtp1927cpg1u0?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/694691d0000000001e0024e0',
+              tag:'钟科',
+              structure:'效果展示',
+              level:'中互动',
+              phase:'验证期',
+              role:'辅助内容'
+            },
+            {
+              title:'6颗贴面，沉浸式体验牙齿焕新过程',
+              cover:'http://sns-img-qn.xhscdn.com/1040g2sg31s6jglemm8e05q8ivsidod2rc0v3abo?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/69845b83000000001a01f76b',
+              tag:'海哥',
+              structure:'效果展示',
+              level:'中互动',
+              phase:'验证期 / 放量期',
+              role:'辅助内容'
+            },
+            {
+              title:'瘪嘴笑不开、露龈笑？牙贴面邪修可以爆改！',
+              cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31tnqd8uimq105qapp50qrneq2jdpdd0?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/69b66842000000001d018989',
+              tag:'王中亮',
+              structure:'效果展示',
+              level:'中互动 / 中承接',
+              phase:'验证期 / 放量期',
+              role:'辅助内容'
+            }
+          ]
+        },
+        {
+          title:'医生IP / 人设塑造型',
+          desc:'讲从业故事、职业理念、日常，主要用来建立情感连接，不适合作为转化主力。',
+          meta:'适合阶段：验证期',
+          role:'信任补强',
+          strength:'表现：中信任 / 低直接转化',
+          warning:'注意：适合补信任，不适合单独承担咨询转化。',
+          filters:['cold_start'],
+          notes:[
+            {
+              title:'宝妈牙医日常｜上班的专业VS生活的松弛',
+              cover:'http://sns-img-qn.xhscdn.com/1040g2sg31p7j2hdnise05q86l5cdp13k7o4m4a8?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/6922b813000000000d03a86e',
+              tag:'刘予颀',
+              structure:'医生信任型',
+              level:'中信任',
+              phase:'验证期',
+              role:'信任补强'
+            },
+            {
+              title:'我劝退了一位25岁想做牙贴面的女生',
+              cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031ueofnk0hu005qapp50qrneq446ko78?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/69ccc1d1000000001d018dd3',
+              tag:'王中亮',
+              structure:'医生信任型',
+              level:'中信任',
+              phase:'验证期',
+              role:'信任补强'
+            },
+            {
+              title:'做牙如做人！15年敬畏心，只为做好这一件事',
+              cover:'http://sns-img-qn.xhscdn.com/1040g00831raa2p84ga005q5s87u69g61abn6c5g?imageView2/2/w/540/format/jpg/q/75',
+              link:'/discovery/item/6967097b0000000022038cdc',
+              tag:'邓凤蕊',
+              structure:'医生信任型',
+              level:'中信任',
+              phase:'验证期',
+              role:'信任补强'
+            }
+          ]
+        }
+      ];
+    }
+    function renderRefs(){
+      const sections = getContentTypesByItem().filter(matchLearnFilter);
+      document.getElementById('refList').innerHTML = sections.map(section => `
+        <div class="ref-section">
+          <div class="ref-type-card">
+            <div class="ref-type-title">${section.title}</div>
+            <div class="ref-type-desc">${section.desc}</div>
+            <div class="ref-type-meta">${section.meta}</div>
+            <div class="ref-type-role">角色：${section.role || '辅助内容'}</div>
+            <div class="ref-type-strength">${section.strength || ''}</div>
+            <div class="ref-type-warning">${section.warning || ''}</div>
+          </div>
+          <div class="ref-notes-grid">
+            ${section.notes.map(note => note.link ? `
+              <a class="ref-note-card" href="${normalizeXhsLink(note.link)}" target="_blank">
+                <div class="ref-note-cover">
+                  ${note.cover ? `<img src="${note.cover}" onerror="this.style.display='none'; this.parentNode.querySelector('.ref-note-ph').style.display='flex';">` : ''}
+                  <div class="ref-note-ph" style="${note.cover ? 'display:none;' : 'display:flex;'}">🦷</div>
+                  <div class="note-structure">${note.structure || ''}</div>
+                  ${note.top ? '<div class="top-tag">TOP</div>' : ''}
+                  <div class="ref-note-overlay"><div class="ref-note-overlay-title">${note.title}</div></div>
+                </div>
+                <div class="ref-note-body">
+                  <div class="ref-note-title">${note.title}</div>
+                  <div class="ref-note-tag">${note.tag || ''}</div>
+                  <div class="note-meta">
+                    ${note.level ? `<span>${note.level}</span>` : ''}
+                    ${note.phase ? `<span>${note.phase}</span>` : ''}
+                    ${note.role ? `<span>${note.role}</span>` : ''}
+                  </div>
+                </div>
+              </a>` : `
+              <div class="ref-note-card ref-note-disabled">
+                <div class="ref-note-cover">
+                  <div class="ref-note-ph">🦷</div>
+                  <div class="note-structure">${note.structure || ''}</div>
+                  ${note.top ? '<div class="top-tag">TOP</div>' : ''}
+                  <div class="ref-note-overlay"><div class="ref-note-overlay-title">${note.title}</div></div>
+                </div>
+                <div class="ref-note-body">
+                  <div class="ref-note-title">${note.title}</div>
+                  <div class="ref-note-tag">${note.tag || ''}</div>
+                  <div class="note-meta">
+                    ${note.level ? `<span>${note.level}</span>` : ''}
+                    ${note.phase ? `<span>${note.phase}</span>` : ''}
+                    ${note.role ? `<span>${note.role}</span>` : ''}
+                  </div>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>`).join('');
+    }
+    function generatePlannerResult(){
+      const team = document.getElementById('team')?.value || '3';
+      const stage = document.getElementById('stage')?.value || 'start';
+      const doctorShow = document.getElementById('doctorShow')?.value || 'some';
+      const item = currentItem || 'orthodontics';
+      const itemName = getItemName(item);
+      const speed = getSpeed(item);
+      const matrix = getMatrix(item, team, doctorShow);
+      const fastPath = getFastPath(item);
+      const benchmark = getBenchmarkByItem(item);
+      const todos = getTodoByItem(item, stage);
+      const kpis = getKpiByItem(item);
+      const risks = getRiskTips(item, doctorShow);
+      const rules = getRulesByItem(item);
+      const mistakes = getMistakesByItem(item);
+      const html = `
+        <div class="plan-card">
+          <div class="plan-title">结论（直接照做）</div>
+          <div class="todo-item">当前更适合优先做：<b>${getMainStrategy(item)}</b><br><br>不建议优先做：${getAvoidStrategy(item)}</div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-title">🧠 核心规律（先看这个）</div>
+          ${rules.map(r => `<div class="rule-item">• ${r}</div>`).join('')}
+        </div>
+        <div class="plan-card">
+          <div class="plan-highlight">🚀 当前品项最短起号路径 <span class="speed-chip">${speed}</span></div>
+          <div class="plan-title">${itemName}｜推荐账号矩阵</div>
+          <div class="matrix-grid">${matrix.map(item => `<div class="matrix-item"><div class="matrix-role">${item.role}</div><div class="matrix-desc">${item.desc}</div></div>`).join('')}</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-title">0-1最短起号路径</div>
+          ${fastPath.map(item => `<div class="path-block" style="margin-bottom:8px;"><div class="path-title">${item.title}</div><div class="path-text">${item.text}</div></div>`).join('')}
+        </div>
+        <div class="plan-card">
+          <div class="plan-title">Benchmark参考</div>
+          <div class="plan-subtitle">先打爆 1 个模型，不要一上来三种都做</div>
+          <div class="benchmark-list">${benchmark.map(item => `<div class="benchmark-item"><div class="bm-title">${item.title}</div><div class="bm-desc">${item.desc}</div><div class="bm-tip">👉 ${item.tip}</div></div>`).join('')}</div>
+        </div>
+        <div class="mistake-card">
+          <div class="rule-title">⚠️ 常见误区</div>
+          ${mistakes.map(r => `<div class="rule-item">• ${r}</div>`).join('')}
+        </div>
+        <div class="plan-card">
+          <div class="plan-title">本周 To Do</div>
+          <div class="todo-list">${todos.map(item => `<div class="todo-item">${item}</div>`).join('')}</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-title">当前重点 KPI</div>
+          <div class="kpi-grid">${kpis.map(item => `<div class="kpi-item"><div class="kpi-label">${item.label}</div><div class="kpi-value">${item.value}</div></div>`).join('')}</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-title">风险提醒</div>
+          <div class="tip-list">${risks.map(item => `<div class="tip-item">${item}</div>`).join('')}</div>
+        </div>`;
+      const box = document.getElementById('plannerResult');
+      box.innerHTML = html;
+      box.classList.remove('hidden');
+      box.scrollIntoView({ behavior:'smooth', block:'start' });
+    }
+
+    window.addEventListener('load', () => { renderRefs(); });
+  
+    const aiSpuOptions = {
+      '种植牙': {
+        groups: {
+          '认知破圈': ['技术差异化','缺牙危害','风险提醒','传统方案误区','判断型答疑'],
+          '转化承接': ['引流转化','牙片帮看','预约号位','适合人群判断'],
+          '信任建立': ['医生人设','医生观点','治疗理念','劝退型','真实沟通记录']
+        }
+      },
+      '牙贴面': {
+        groups: {
+          '高意向转化': ['精准症状转化','门牙缝','过小牙','牙黄','单颗修复','不磨牙/少磨牙'],
+          '决策答疑': ['能保持多久','会不会伤牙','一颗能不能做','树脂vs瓷','适合人群','做之前要知道什么'],
+          '医生信任': ['医生人设','审美理念','劝退型','案例判断逻辑']
+        }
+      },
+      '正畸': {
+        groups: {
+          '前置判断': ['判断型','劝退型','需要不需要做','牙性/骨性判断','严重程度判断'],
+          '审美认知': ['审美误区','脸型vs牙齿','嘴凸认知','鼻基底/侧貌认知'],
+          '案例解释': ['案例解释','变化逻辑','深覆合','嘴凸','下巴后缩']
+        }
+      }
+    };
+
+    function renderAISelectors(){
+      const groupSelect = document.getElementById('contentGroup');
+      const angleSelect = document.getElementById('contentAngle');
+      if(!groupSelect || !angleSelect) return;
+      const spuName = getItemName(currentItem);
+      const groups = aiSpuOptions[spuName]?.groups || {};
+      const groupNames = Object.keys(groups);
+      groupSelect.innerHTML = groupNames.map(g => `<option value="${g}">${g}</option>`).join('');
+      const currentGroup = groupSelect.value;
+      angleSelect.innerHTML = (groups[currentGroup] || []).map(a => `<option value="${a}">${a}</option>`).join('');
+      groupSelect.onchange = () => {
+        angleSelect.innerHTML = (groups[groupSelect.value] || []).map(a => `<option value="${a}">${a}</option>`).join('');
+        renderComboLine();
+      };
+      angleSelect.onchange = renderComboLine;
+    }
+
+    function renderContentTypeRecommend(){
+      const box = document.getElementById('contentTypeRecommend');
+      if(!box) return;
+      const spuName = getItemName(currentItem);
+      const map = {
+        '种植牙': { main:'优先推荐：认知破圈 + 转化承接', desc:'先用技术差异和风险判断破圈，再用牙片帮看、预约号位承接咨询。', avoid:'不建议一上来只做纯科普。'},
+        '牙贴面': { main:'优先推荐：高意向转化 + 决策答疑', desc:'先打具体症状词，再补 FAQ 决策答疑，最适合高意向转化。', avoid:'不建议一上来写太泛的变美文案。'},
+        '正畸': { main:'优先推荐：前置判断 + 审美认知', desc:'先帮用户判断问题，再打破认知误区，比直接讲方案更稳。', avoid:'不建议一开始就重案例、重方案。'}
+      };
+      const data = map[spuName];
+      box.innerHTML = `<div class="ai-lite-title">推荐方向</div><div class="ai-lite-main">${data.main}</div><div class="ai-lite-desc">${data.desc}</div><div class="ai-lite-desc" style="color:#B38484;margin-top:4px;">${data.avoid}</div>`;
+    }
+
+    function renderComboLine(){
+      const box = document.getElementById('comboLine');
+      if(!box) return;
+      const spuName = getItemName(currentItem);
+      const group = document.getElementById('contentGroup')?.value || '';
+      const angle = document.getElementById('contentAngle')?.value || '';
+      const persona = document.getElementById('persona')?.value || '助理';
+      const goal = document.getElementById('contentGoal')?.value || '拉点击';
+      const mode = currentMode === 'video' ? '视频脚本' : '图文';
+      box.innerHTML = `当前会按：<b>${escapeHtml(spuName)}</b> × <b>${escapeHtml(group)}</b> × <b>${escapeHtml(angle)}</b> × <b>${escapeHtml(persona)}</b> × <b>${escapeHtml(goal)}</b> 生成 <b>${mode}</b>。`;
+    }
+
+    const _oldSwitchItem = switchItem;
+    switchItem = function(item){
+      _oldSwitchItem(item);
+      renderAISelectors();
+      renderContentTypeRecommend();
+      renderComboLine();
+    };
+
+    const _oldSwitchMode = switchMode;
+    switchMode = function(mode, el){
+      _oldSwitchMode(mode, el);
+      renderComboLine();
+    };
+
+    const _oldShowTab = showTab;
+    showTab = function(i){
+      _oldShowTab(i);
+      if(i===3){
+        renderAISelectors();
+        renderContentTypeRecommend();
+        renderComboLine();
+      }
+    };
+
+    window.addEventListener('load', function(){
+      renderAISelectors();
+      renderContentTypeRecommend();
+      renderComboLine();
+      const btn = document.getElementById('generateBtnApi');
+      if(btn){ btn.addEventListener('click', generateAI); }
+      ['contentGoal','persona'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('change', renderComboLine);
+      });
+    });
+
 </script>
+
+<script>
+(function(){
+const FILTER_LABELS={all:'全部',main:'主力内容',support:'辅助内容',infra:'基础设施',trust:'信任补强'};
+window.currentLearnFilter='all';
+function sectionBucket(section){return section.bucket||'support';}
+window.renderLearnFilterBar=function(){const sections=getContentTypesByItem();const buckets=['all',...new Set(sections.map(sectionBucket))];const bar=document.getElementById('learnFilterBar');if(!bar)return;bar.innerHTML=buckets.map(b=>`<button class="learn-filter-btn ${currentLearnFilter===b?'active':''}" onclick="setLearnFilter('${b}', this)">${FILTER_LABELS[b]||b}</button>`).join('');};
+window.setLearnFilter=function(filter){currentLearnFilter=filter;renderLearnFilterBar();renderRefs();};
+window.matchLearnFilter=function(section){if(currentLearnFilter==='all')return true;return sectionBucket(section)===currentLearnFilter;};
+window.getRulesByItem=function(item=currentItem){if(item==='implant')return['引流转化型内容是基础设施，必须稳定产出。','技术差异化内容最容易起量，是破圈关键。','科普内容适合做SEO，不适合做投放主力。','医生IP内容用于补信任，不承担主要转化。'];if(item==='veneer')return['精准症状转化型优先级最高，是主力内容。','FAQ是基础内容，不是投放主力。','效果展示互动高，但转化通常不如精准症状型。','促销型内容效果普遍较弱。'];return['症状决策型/判断型是最稳的起号载体。','助理运营型冷启动最快，劝退式叙事更容易拿点击。','医生IP更适合补信任，不适合冷启动阶段单独承担起量。','单篇爆款依赖度高于30%要预警，高于50%风险明显。'];};
+window.getMistakesByItem=function(item=currentItem){if(item==='implant')return['只做科普内容，不做引流内容。','从0内容开始重投放。','引流转化型比例长期低于50%。'];if(item==='veneer')return['一上来重投FAQ和促销内容。','忽略精准症状转化型。','中途停投超过7天，导致重启成本变高。'];return['只讲专业，不讲用户决策问题。','冷启动阶段过早追求强转化。','只靠单条爆款，不做同症状变体复制。'];};
+window.getMatrix=function(item,team,doctorShow){if(item==='orthodontics'){if(doctorShow==='none')return[{role:'助理号 × 2',desc:'一个做劝退/判断型，一个做转化承接，医生不出镜时先把助理号做强。'},{role:'机构/预约号 × 1',desc:'统一承接咨询和预约说明，不强做医生口吻。'}];if(team==='3')return[{role:'助理号 × 1',desc:'负责劝退式、判断型、咨询高频问题，优先起点击。'},{role:'医生号 × 1',desc:'负责建立专业信任，适合讲判断逻辑、症状解释。'},{role:'机构/预约号 × 1',desc:'承接咨询、发布预约说明和基础转化内容。'}];if(team==='4')return[{role:'助理号 × 2',desc:'一个偏冷启动，一个偏转化承接。'},{role:'医生号 × 1',desc:'稳定建立信任和专业判断。'},{role:'机构/预约号 × 1',desc:'统一承接咨询。'}];return[{role:'助理号 × 2',desc:'承担冷启动和转化前置内容。'},{role:'医生号 × 1',desc:'承担信任建立。'},{role:'美学号 × 1',desc:'围绕脸型、侧貌、颜值变化拉新。'},{role:'机构/预约号 × 1',desc:'承接咨询。'}];}if(item==='implant'){if(doctorShow==='none')return[{role:'助理号 × 2',desc:'一个做预约/答疑引流，一个做缺牙危害/一定要种吗等前置内容。'},{role:'机构/预约号 × 1',desc:'承接咨询和号位预约，弱化医生IP打法。'}];if(doctorShow==='some'&&team==='3')return[{role:'助理号 × 1',desc:'承担直接预约/牙片帮看等引流内容。'},{role:'医生IP号 × 1',desc:'医生偶尔出镜，重点做技术差异化和答疑。'},{role:'机构/预约号 × 1',desc:'统一承接咨询和转化。'}];if(team==='3')return[{role:'医生IP号 × 1',desc:'做技术差异化、答疑、方案理解内容。'},{role:'助理号 × 1',desc:'做预约、答疑、牙片帮看等直接引流内容。'},{role:'机构/预约号 × 1',desc:'承接咨询和转化。'}];return[{role:'医生IP号 × 1',desc:'负责技术差异化、医生价值型内容。'},{role:'助理号 × 1',desc:'负责直接预约/答疑转化。'},{role:'科普/痛点号 × 1',desc:'负责缺牙危害、痛点认知内容。'},{role:'机构/预约号 × 1',desc:'统一承接咨询。'}];}if(doctorShow==='none')return[{role:'精准症状转化号 × 1',desc:'主打牙缝大/过小牙/黄牙等高意向症状内容。'},{role:'助理预约号 × 1',desc:'负责沟通温度、预约承接。'},{role:'案例展示号 × 1',desc:'负责效果展示和信任补强。'}];if(team==='3')return[{role:'精准症状转化号 × 1',desc:'主打牙缝大/过小牙/黄牙等高意向症状内容。'},{role:'助理预约号 × 1',desc:'负责沟通温度、预约承接。'},{role:'案例展示号 × 1',desc:'负责效果展示和信任补强。'}];return[{role:'精准症状转化号 × 1',desc:'作为主力跑量号，优先做高ROI内容。'},{role:'助理预约号 × 1',desc:'做咨询承接和预约转化。'},{role:'案例展示号 × 1',desc:'强化结果感和信任。'},{role:'医生/美学号 × 1',desc:'补医生背书或审美专业感。'}];};
+window.getPhaseBenchmarks=function(item){
+if(item==='implant')return[
+{stage:'第1-2周｜冷启动期',min:'累计留资≥1条',ok:'累计留资≥3条',excellent:'累计留资≥5条',signal:'已发布≥5篇内容，且至少1篇笔记留资≥3条'},
+{stage:'第3-4周｜验证期',min:'单周留资≥3条',ok:'单周留资≥5条',excellent:'单周留资≥8条',signal:'连续2周单周留资≥5条，且出现1篇核心爆款（单篇≥5条）'},
+{stage:'第5周+｜规模复制期',min:'周留资≥5条',ok:'周留资≥8条',excellent:'周留资≥10条',signal:'至少2类内容稳定承接留资，Top1不再承担全部留资'}
+];
+if(item==='veneer')return[
+{stage:'第1-2周｜冷启动期',min:'累计留资≥1条',ok:'累计留资≥2条',excellent:'累计留资≥4条',signal:'至少1篇笔记留资≥2条，说明已有可放大的案例方向'},
+{stage:'第3-4周｜验证期',min:'单周留资≥3条',ok:'单周留资≥5条',excellent:'单周留资≥8条',signal:'连续2周单周留资≥5条，案例型内容开始稳定承接'},
+{stage:'第5周+｜规模复制期',min:'周留资≥5条',ok:'周留资≥8条',excellent:'周留资≥12条',signal:'爆款案例模板可持续复制，且不只依赖单一案例'}
+];
+return[
+{stage:'第1-3周｜冷启动期',min:'累计留资≥1条',ok:'累计留资≥2条',excellent:'累计留资≥5条',signal:'至少跑出1个可复制的症状/判断方向'},
+{stage:'第4-8周｜验证期',min:'单周留资≥3条',ok:'连续2周单周留资≥5条',excellent:'连续2周单周留资≥10条',signal:'至少找到1个核心爆款方向并开始复制变体'},
+{stage:'第9周+｜规模复制期',min:'月留资≥15条',ok:'月留资≥20条（连续2个月）',excellent:'月留资≥40条',signal:'单篇依赖度升高时立即补4-6篇同症状变体'}
+];
+};
+window.getFastPath=function(item,doctorShow='some'){if(item==='orthodontics')return[{title:'第1-3周｜冷启动期',text:`先起点击，不急转化。\n优先发劝退式、判断型、症状决策型内容。${doctorShow==='none'?' 医生不出镜时，先把助理判断型和机构承接号做起来。':''}`},{title:'第4-8周｜验证期',text:'围绕1个核心症状做3-5篇变体，开始轻投放。\n找到1个核心方向后再补医生IP和案例解释。'},{title:'第9周+｜规模复制期',text:'把留资最高的症状/颜值方向复制出3-5篇变体，持续放量。\n监控单篇依赖度，避免长期只靠1条笔记。'}];if(item==='implant')return[{title:'第1-2周｜冷启动期',text:`先铺内容，不急着从0投放。\n优先发资质/人设内容、缺牙危害/一定要种吗这类痛点科普、预约引流/答疑类内容。${doctorShow==='none'?' 医生不出镜时，把预约/答疑和缺牙危害两条线先跑通。':''}`},{title:'第3-4周｜验证期',text:'开始投放。\n引流转化型内容占比提高到50%左右，技术差异化引流型和直接预约/答疑型同步测试。'},{title:'第5周+｜规模复制期',text:'持续扩充投放池，核心爆款给足预算跑量。\n每周补1-2篇新测试内容，爆款老化时立刻复制3-5个变体。'}];return[{title:'第1周｜冷启动期',text:`目标不是慢铺内容，而是尽快找到“精准症状词 + 顾虑解除词”的爆款方向。\n精准症状转化型高频测试，FAQ仅做SEO布局。${doctorShow==='none'?' 医生不出镜时更要强化真实案例图和助理承接。':''}`},{title:'第3-8周｜验证期',text:'围绕已验证方向持续做变体。\n精准症状转化型持续跑量，效果展示型做辅助测试，医生IP内容低频维持温度。'},{title:'第9周+｜规模复制期',text:'维持2-3篇并行跑量的精准症状内容，FAQ继续不投放做基础内容。\n控制Top1依赖度，持续补新素材。'}];};
+window.getTodoByItem=function(item,stage,doctorShow='some'){
+if(item==='orthodontics'){
+  if(stage==='start') return [
+    '判断型 / 症状决策型：3-4篇；围绕1个核心症状做判断与分型。',
+    '劝退 / 避坑型：2篇；优先拿点击，不急着讲复杂方案。',
+    '医生IP / 身份锚定：1篇；只做信任底座，不承担前期主起量。',
+    '内容配比建议：判断型60%｜劝退型25%｜医生IP15%。'
+  ];
+  if(stage==='grow') return [
+    '判断型：2-3篇；把高表现结构做2-3个同症状变体。',
+    '劝退型：1-2篇；继续稳点击，承接新的问题入口。',
+    '案例解释 / 结果说明：1-2篇；补“为什么会这样变”。',
+    '内容配比建议：判断型50%｜劝退型25%｜案例解释15%｜医生IP10%。'
+  ];
+  return [
+    '判断型：2篇；维持主流量入口。',
+    '劝退型 / 高频问题：1篇；维持新用户进入。',
+    '案例解释型：1-2篇；补信任与结果理解。',
+    '医生IP / 日常温度内容：1篇；维持账号可信感。',
+    '内容配比建议：判断型40%｜案例解释25%｜劝退型20%｜医生IP15%。'
+  ];
+}
+if(item==='implant'){
+  if(stage==='start') return [
+    '医生资质 / IP介绍类：2-3篇；告诉用户这个医生是谁、擅长什么。',
+    '缺牙核心痛点科普类：5-7篇；围绕“缺牙危害 / 一定要种吗 / 拖着会怎样”展开。',
+    '预约引流 / 答疑类：2-3篇；用“你发牙片 / 照片，闲时帮看”这类低门槛入口。',
+    '内容配比建议：痛点科普60%｜预约引流25%｜医生IP15%。'
+  ];
+  if(stage==='grow') return [
+    '技术差异化引流型：2-3篇；聚焦“为什么不一定按老办法做”。',
+    '直接预约 / 答疑型：2-3篇；承接咨询动作，降低决策门槛。',
+    '缺牙危害 / 科普补充型：1-2篇；继续做认知铺垫。',
+    '内容配比建议：引流转化50%｜技术差异化30%｜科普20%。'
+  ];
+  return [
+    '直接预约 / 引流转化型：3-4篇；做稳定承接。',
+    '技术差异化变体：1-2篇；围绕爆款方向持续复制。',
+    '日常科普 / IP类：1-2篇；维持账号可信度和新问题覆盖。',
+    '内容配比建议：引流转化60%｜技术差异化25%｜IP/科普15%。'
+  ];
+}
+if(stage==='start') return [
+  '颜值变化案例：4-6篇；优先让用户看到“变成什么样”。',
+  '轻科普 / 适合人群 / 误区：2-3篇；只做基础解释。',
+  '引流承接类：1-2篇；承接咨询但不喧宾夺主。',
+  '内容配比建议：案例65%｜科普20%｜引流15%。'
+];
+if(stage==='grow') return [
+  '颜值案例强化：3-4篇；围绕高表现案例持续做同类题材。',
+  '预约 / 承接类：2-3篇；把意向用户往咨询动作上带。',
+  '轻科普：1篇；做FAQ补位即可。',
+  '内容配比建议：案例60%｜引流30%｜科普10%。'
+];
+return [
+  '爆款案例变体：3-4篇；继续复制“同问题、不同脸型/角度/表达”。',
+  '新案例测试：1-2篇；补新素材，防止题材疲劳。',
+  'FAQ / 轻科普：1-2篇；维持SEO和自然搜索流。',
+  '内容配比建议：案例70%｜引流20%｜科普10%。'
+];
+};
+window.generatePlannerResult=function(){const team=document.getElementById('team')?.value||'3';const stage=document.getElementById('stage')?.value||'start';const doctorShow=document.getElementById('doctorShow')?.value||'some';const item=currentItem||'orthodontics';const itemName=getItemName(item);const speed=getSpeed(item);const matrix=getMatrix(item,team,doctorShow);const fastPath=getFastPath(item,doctorShow);const phaseBench=getPhaseBenchmarks(item);const benchmark=getBenchmarkByItem(item);const todos=getTodoByItem(item,stage,doctorShow);const kpis=getKpiByItem(item);const risks=getRiskTips(item,doctorShow);const rules=getRulesByItem(item);const mistakes=getMistakesByItem(item);const html=`<div class="plan-card"><div class="plan-title">结论（直接照做）</div><div class="todo-item">当前更适合优先做：<b>${getMainStrategy(item)}</b><br><br>不建议优先做：${getAvoidStrategy(item)}</div></div><div class="rule-card"><div class="rule-title">🧠 核心规律（先看这个）</div>${rules.map(r=>`<div class="rule-item">• ${r}</div>`).join('')}</div><div class="plan-card"><div class="plan-highlight">🚀 当前品项最短起号路径 <span class="speed-chip">${speed}</span></div><div class="plan-title">${itemName}｜推荐账号矩阵</div><div class="matrix-grid">${matrix.map(m=>`<div class="matrix-item"><div class="matrix-role">${m.role}</div><div class="matrix-desc">${m.desc}</div></div>`).join('')}</div></div><div class="plan-card"><div class="plan-title">0-1最短起号路径</div>${fastPath.map((p,idx)=>`<div class="path-block" style="margin-bottom:10px;"><div class="path-title">${p.title}</div><div class="path-text">${p.text}</div><div class="plan-subtitle" style="margin-top:8px;margin-bottom:6px;">阶段 Benchmark</div><div class="kpi-grid" style="grid-template-columns:1fr 1fr 1fr;"><div class="kpi-item"><div class="kpi-label">最低线</div><div class="kpi-value" style="font-size:12px;line-height:1.5;">${phaseBench[idx].min}</div></div><div class="kpi-item"><div class="kpi-label">达标线</div><div class="kpi-value" style="font-size:12px;line-height:1.5;">${phaseBench[idx].ok}</div></div><div class="kpi-item"><div class="kpi-label">优秀线</div><div class="kpi-value" style="font-size:12px;line-height:1.5;">${phaseBench[idx].excellent}</div></div></div><div class="tip-item" style="margin-top:8px;">进入下一阶段信号：${phaseBench[idx].signal}</div></div>`).join('')}</div><div class="plan-card"><div class="plan-title">Benchmark参考</div><div class="plan-subtitle">先选1个模型打爆，不要一上来同时做三种</div><div class="benchmark-list">${benchmark.map(b=>`<div class="benchmark-item"><div class="bm-title">${b.title}</div><div class="bm-desc">${b.desc}</div><div class="bm-tip">👉 ${b.tip}</div></div>`).join('')}</div></div><div class="plan-card"><div class="plan-title">本周 To Do</div><div class="todo-list">${todos.map(t=>`<div class="todo-item">${t}</div>`).join('')}</div></div><div class="plan-card"><div class="plan-title">当前重点 KPI</div><div class="kpi-grid">${kpis.map(k=>`<div class="kpi-item"><div class="kpi-label">${k.label}</div><div class="kpi-value">${k.value}</div></div>`).join('')}</div></div><div class="mistake-card"><div class="rule-title">⚠️ 常见误区</div>${mistakes.map(m=>`<div class="rule-item">• ${m}</div>`).join('')}</div><div class="plan-card"><div class="plan-title">风险提醒</div><div class="tip-list">${risks.map(r=>`<div class="tip-item">${r}</div>`).join('')}</div></div>`;const box=document.getElementById('plannerResult');box.innerHTML=html;box.classList.remove('hidden');box.scrollIntoView({behavior:'smooth',block:'start'});};
+window.getContentTypesByItem=function(){return []};
+// content data inserted later by previous script; keep if overwritten below
+window.generateAI=function(){const pain=(document.getElementById('pain').value||'').trim();const selling=(document.getElementById('selling').value||'').trim();const persona=document.getElementById('persona').value;const goal=document.getElementById('contentGoal').value;const angle=document.getElementById('angle').value;const item=currentItem;const goalLabel={click:'拉点击',consult:'拉咨询',trust:'建信任'}[goal];const angleLabel={core:'主力结构',safe:'稳妥表达',compare:'对比解释'}[angle];const resultBox=document.getElementById('aiResult');function titlesFor(item){if(item==='implant'){if(goal==='consult')return[`${pain}的人，先别急着做决定`,`${pain}，可以先判断再处理`,`${persona}视角：${pain}先看这一步`];if(goal==='trust')return[`为什么很多人会忽略 ${pain}`,`关于 ${pain}，先讲清判断逻辑`,`${persona}提醒：${pain}别只看价格`];return[`${pain}，别用老思路处理`,`${pain}先看这个差异`,`${pain}的人一定要先判断`];}if(item==='veneer'){if(goal==='consult')return[`${pain}，不一定要你想的那样做`,`${pain}也可以先评估再决定`,`${persona}建议：${pain}先看适不适合`];if(goal==='trust')return[`关于 ${pain}，先别急着决定`,`${pain}，先把适合不适合讲清楚`,`${persona}视角：${pain}更看这点`];return[`${pain}，其实可以更直接切入`,`${pain}这类问题更适合这样写`,`${pain}先抓具体症状再说`];}if(goal==='consult')return[`${pain}，先别急着做牙套`,`${pain}的人先判断这个`,`${persona}建议：${pain}先看适不适合`];if(goal==='trust')return[`关于 ${pain}，先把逻辑讲清楚`,`${pain}不是只看整不整齐`,`${persona}视角：${pain}更看判断`];return[`${pain}，这类标题更容易拿点击`,`${pain}先别急着下结论`,`${pain}更适合这样切题`];}function coverLine(item){if(item==='implant')return angle==='compare'?'技术差异 / 判断逻辑':'缺牙判断 / 决策前置';if(item==='veneer')return angle==='core'?'精准症状 / 顾虑解除':'判断适合 / 真实表达';return angle==='safe'?'判断逻辑 / 稳妥表达':'症状决策 / 冷启动';}const lines=[`【内容目标】${goalLabel}`,`【推荐角度】${angleLabel}`,`【人设建议】${persona}`,'','【标题方向】',...titlesFor(item).map((t,i)=>`${i+1}. ${t}`),'','【封面文案】',`${pain||'这里换成你的用户问题'}\n${coverLine(item)}`,'','【正文结构】',`1. 先点出用户现在最纠结的是：${pain||'补一个具体痛点'}`,'2. 再说明为什么这件事不能只看表面，先要判断适不适合。',`3. 顺着带出你的卖点：${selling||'补一句最核心的差异化卖点'}`,'4. 最后用“可以先判断 / 先评估 / 不用急着决定”收尾。','','【评论区引导】',`如果你也在纠结「${pain||'这个问题'}」，可以留言你的情况。`,'','【使用提醒】',item==='implant'?'优先把“技术差异 / 引流转化 / 缺牙危害”三类角度分开写，不要混在一篇里。':item==='veneer'?'优先把症状词写具体，不要只写“好不好看 / 能不能做”这类泛问题。':'优先把“判断问题”和“医生信任问题”拆开写，不要一篇里什么都讲。'];resultBox.innerHTML=`<div class="ai-card"><pre style="white-space:pre-wrap;margin:0;font-family:inherit;line-height:1.8;">${lines.join('\n')}</pre></div>`;resultBox.classList.remove('hidden');resultBox.scrollIntoView({behavior:'smooth',block:'start'});};
+const extraStyle=document.createElement('style');extraStyle.textContent='.rule-card,.mistake-card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;border:1px solid rgba(195,227,239,.62);box-shadow:0 6px 20px rgba(180,208,232,.12)} .kpi-grid .kpi-item .kpi-value{word-break:break-word}';document.head.appendChild(extraStyle);
+window.addEventListener('load',()=>{currentLearnFilter='all';renderLearnFilterBar();renderRefs();});
+})();
+
+    const aiSpuOptions = {
+      '种植牙': {
+        groups: {
+          '认知破圈': ['技术差异化','缺牙危害','风险提醒','传统方案误区','判断型答疑'],
+          '转化承接': ['引流转化','牙片帮看','预约号位','适合人群判断'],
+          '信任建立': ['医生人设','医生观点','治疗理念','劝退型','真实沟通记录']
+        }
+      },
+      '牙贴面': {
+        groups: {
+          '高意向转化': ['精准症状转化','门牙缝','过小牙','牙黄','单颗修复','不磨牙/少磨牙'],
+          '决策答疑': ['能保持多久','会不会伤牙','一颗能不能做','树脂vs瓷','适合人群','做之前要知道什么'],
+          '医生信任': ['医生人设','审美理念','劝退型','案例判断逻辑']
+        }
+      },
+      '正畸': {
+        groups: {
+          '前置判断': ['判断型','劝退型','需要不需要做','牙性/骨性判断','严重程度判断'],
+          '审美认知': ['审美误区','脸型vs牙齿','嘴凸认知','鼻基底/侧貌认知'],
+          '案例解释': ['案例解释','变化逻辑','深覆合','嘴凸','下巴后缩']
+        }
+      }
+    };
+
+    function renderAISelectors(){
+      const groupSelect = document.getElementById('contentGroup');
+      const angleSelect = document.getElementById('contentAngle');
+      if(!groupSelect || !angleSelect) return;
+      const spuName = getItemName(currentItem);
+      const groups = aiSpuOptions[spuName]?.groups || {};
+      const groupNames = Object.keys(groups);
+      groupSelect.innerHTML = groupNames.map(g => `<option value="${g}">${g}</option>`).join('');
+      const currentGroup = groupSelect.value;
+      angleSelect.innerHTML = (groups[currentGroup] || []).map(a => `<option value="${a}">${a}</option>`).join('');
+      groupSelect.onchange = () => {
+        angleSelect.innerHTML = (groups[groupSelect.value] || []).map(a => `<option value="${a}">${a}</option>`).join('');
+        renderComboLine();
+      };
+      angleSelect.onchange = renderComboLine;
+    }
+
+    function renderContentTypeRecommend(){
+      const box = document.getElementById('contentTypeRecommend');
+      if(!box) return;
+      const spuName = getItemName(currentItem);
+      const map = {
+        '种植牙': { main:'优先推荐：认知破圈 + 转化承接', desc:'先用技术差异和风险判断破圈，再用牙片帮看、预约号位承接咨询。', avoid:'不建议一上来只做纯科普。'},
+        '牙贴面': { main:'优先推荐：高意向转化 + 决策答疑', desc:'先打具体症状词，再补 FAQ 决策答疑，最适合高意向转化。', avoid:'不建议一上来写太泛的变美文案。'},
+        '正畸': { main:'优先推荐：前置判断 + 审美认知', desc:'先帮用户判断问题，再打破认知误区，比直接讲方案更稳。', avoid:'不建议一开始就重案例、重方案。'}
+      };
+      const data = map[spuName];
+      box.innerHTML = `<div class="ai-lite-title">推荐方向</div><div class="ai-lite-main">${data.main}</div><div class="ai-lite-desc">${data.desc}</div><div class="ai-lite-desc" style="color:#B38484;margin-top:4px;">${data.avoid}</div>`;
+    }
+
+    function renderComboLine(){
+      const box = document.getElementById('comboLine');
+      if(!box) return;
+      const spuName = getItemName(currentItem);
+      const group = document.getElementById('contentGroup')?.value || '';
+      const angle = document.getElementById('contentAngle')?.value || '';
+      const persona = document.getElementById('persona')?.value || '助理';
+      const goal = document.getElementById('contentGoal')?.value || '拉点击';
+      const mode = currentMode === 'video' ? '视频脚本' : '图文';
+      box.innerHTML = `当前会按：<b>${escapeHtml(spuName)}</b> × <b>${escapeHtml(group)}</b> × <b>${escapeHtml(angle)}</b> × <b>${escapeHtml(persona)}</b> × <b>${escapeHtml(goal)}</b> 生成 <b>${mode}</b>。`;
+    }
+
+    const _oldSwitchItem = switchItem;
+    switchItem = function(item){
+      _oldSwitchItem(item);
+      renderAISelectors();
+      renderContentTypeRecommend();
+      renderComboLine();
+    };
+
+    const _oldSwitchMode = switchMode;
+    switchMode = function(mode, el){
+      _oldSwitchMode(mode, el);
+      renderComboLine();
+    };
+
+    const _oldShowTab = showTab;
+    showTab = function(i){
+      _oldShowTab(i);
+      if(i===3){
+        renderAISelectors();
+        renderContentTypeRecommend();
+        renderComboLine();
+      }
+    };
+
+    window.addEventListener('load', function(){
+      renderAISelectors();
+      renderContentTypeRecommend();
+      renderComboLine();
+      const btn = document.getElementById('generateBtnApi');
+      if(btn){ btn.addEventListener('click', generateAI); }
+      ['contentGoal','persona'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('change', renderComboLine);
+      });
+    });
+
+</script>
+
+<script>
+(function(){
+window.getContentTypesByItem=function(){
+  if(currentItem==='orthodontics') return [
+    {title:'劝退式 / 避坑型', desc:'用“先别做”“不要急着做”这类切入抢点击，适合冷启动建立停留和兴趣。', meta:'适合阶段：冷启动', role:'主力内容', strength:'表现：强点击 / 中信任', warning:'注意：适合起量，不适合单独承担后续转化。', bucket:'main', notes:[{title:'为什么我宁愿限号，也要保证面诊时长？', cover:'http://sns-img-qn.xhscdn.com/notes_pre_post/1040g3k831trkmbq8gc005q9403nc9usi8sjtms0?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/69ba52e4000000002200cc93', tag:'正畸医生', structure:'医生信任型', level:'中信任 / 强点击', phase:'冷启动', role:'主力内容', top:true}]},
+    {title:'判断型 / 自测型', desc:'围绕“适不适合矫正”“这类问题到底是不是骨性/牙性”帮助用户做初步判断。', meta:'适合阶段：冷启动-验证期', role:'主力内容', strength:'表现：中引流 / 中信任', warning:'注意：更适合建立专业判断，不要写成太学术的知识说明。', bucket:'main', notes:[{title:'骨性嘴凸可以用控根内收调整吗？', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31rr2pg1f22105q11jt9injgpce2l94g?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/69783616000000001a0271fc', tag:'正畸判断型', structure:'判断型', level:'中引流 / 中信任', phase:'冷启动 / 验证期', role:'主力内容', top:true},{title:'为什么大部分嘴凸会有鼻基底凹陷的情况?', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031t8a5tpbme005pd53o20s6a6k79jmb8?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/69a686f40000000022039e19', tag:'正畸判断型', structure:'判断型', level:'中引流', phase:'验证期', role:'主力内容'}]},
+    {title:'案例型 / 结果解释型', desc:'用典型问题和结果变化做承接，更适合在已有点击和认知基础上补强信任。', meta:'适合阶段：验证期-放量期', role:'辅助内容', strength:'表现：中信任 / 中承接', warning:'注意：更适合补足结果理解，不建议冷启动阶段单独依赖。', bucket:'support', notes:[{title:'下牙完全看不见？深覆合覆盖矫正一定要看！', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031sd2n5fb5e005pd53o20s6a65e2727g?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/698aa42f000000001d013baa', tag:'正畸案例型', structure:'案例型', level:'中信任', phase:'验证期 / 放量期', role:'辅助内容'}]}
+  ];
+  if(currentItem==='implant') return [
+    {title:'技术 / 概念差异化引流型', desc:'以“新技术 / 对比传统 / 幸亏没做”为核心，强引流、强互动、强转化。', meta:'适合阶段：验证期-放量期', role:'主力内容', strength:'表现：强引流 / 强转化', warning:'注意：不要过度堆技术名词，用户要先看懂问题和差异。', bucket:'main', notes:[{title:'牙齿缺失新技术！幸亏没做传统种植牙！', cover:'http://sns-img-qn.xhscdn.com/1040g2sg31pj7i5j4kmkg5q7taq1ttbs2gvbaggo?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/69201535000000001e036da9', tag:'上海种植牙于淞', structure:'技术差异化', level:'强引流 / 强转化', phase:'验证期 / 放量期', role:'主力内容', top:true},{title:'牙齿缺失好消息！无需磨牙！ACM种植新技术', cover:'http://sns-img-qn.xhscdn.com/1040g2sg31rls5ic532605q7taq1ttbs2migops0?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/6972e14d000000001a021d62', tag:'上海种植牙于淞', structure:'技术差异化', level:'强引流', phase:'验证期', role:'主力内容'},{title:'微创种牙技术的优势是什么？', cover:'http://sns-img-qn.xhscdn.com/1040g00831k7s7kv12o005pd5tl5i2sp5qam37k0?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/687f2ba9000000002001a7fc', tag:'常州种植牙肖企文', structure:'技术差异化', level:'中引流', phase:'验证期', role:'辅助内容'}]},
+    {title:'直接预约 / 引流转化型', desc:'以“预约 / 号位 / 牙片帮看 / 答疑”为核心，是种植牙留资基础设施。', meta:'适合阶段：全阶段', role:'基础设施', strength:'表现：高转化 / 稳定承接', warning:'注意：不能只有这类内容，前面仍需要内容铺垫和信任支撑。', bucket:'infra', notes:[{title:'成都种植牙|欧国敏教授亲诊号位开放预约中', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031u88gk8bhs005q4tkldma757keia7po?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/694e4eb0000000001e00f70e', tag:'欧国敏种植小助理', structure:'引流转化', level:'高转化', phase:'全阶段', role:'基础设施', top:true},{title:'成都种植牙： 华西团队公益面诊开放中！', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31qlv4mebn0105q8li91s665p8pjmqbg?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/6922d8d0000000001e009683', tag:'欧国敏种植小助理', structure:'引流转化', level:'中转化', phase:'全阶段', role:'基础设施'},{title:'合肥种植牙，你发牙片，闲时帮看', cover:'http://sns-img-qn.xhscdn.com/notes_pre_post/1040g3k831pa9fu7sjcdg5pcec65og6aosvfce4g?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/69257c01000000001f007d76', tag:'合肥种植牙秦历', structure:'引流转化', level:'高转化', phase:'全阶段', role:'基础设施', top:true},{title:'武汉种植牙特惠ing！可用医保超划算', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031r2p5mo6gm005q0s96244v1vpdps4e0?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/695cbe79000000002203386f', tag:'胡建教授助理', structure:'引流转化', level:'中转化', phase:'验证期', role:'基础设施'}]},
+    {title:'种植牙知识科普型', desc:'解释概念、流程、选择方法，适合做SEO积累，不适合作为投放主力。', meta:'适合阶段：冷启动', role:'辅助内容', strength:'表现：中引流 / 低直接转化', warning:'注意：更适合自然流和SEO，不适合重投。', bucket:'support', notes:[{title:'长期缺牙不种的危害是什么？', cover:'http://sns-img-qn.xhscdn.com/1040g2sg31kg1og3piol05pd5tl5i2sp5cishs48?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/688789ac000000001d00f043', tag:'常州种植牙肖企文', structure:'风险提醒', level:'中引流', phase:'冷启动', role:'辅助内容'},{title:'为什么90％人种的都是6号牙？一定要种吗？', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31pun73tjlu905q0s96244v1vmv4np6g?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/693a669b000000001e015e49', tag:'胡建教授助理', structure:'科普型', level:'中引流', phase:'冷启动', role:'辅助内容'},{title:'牙齿只剩残根了，一定要种牙吗？', cover:'http://sns-img-qn.xhscdn.com/1040g2sg31o3k8hjol8e05pcec65og6ao3le8p0g?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/68fde4500000000004000846', tag:'合肥种植牙秦历', structure:'科普型', level:'中引流', phase:'冷启动', role:'辅助内容'}]},
+    {title:'医生IP / 人设型', desc:'用医生视角、真心话、劝退、故事型内容建立信任，适合中长期内容积淀。', meta:'适合阶段：冷启动-验证期', role:'信任补强', strength:'表现：中引流 / 中信任', warning:'注意：适合补信任，不承担主要转化。', bucket:'trust', notes:[{title:'缺牙想种牙，心里害怕怎么办？', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31q1c9uku72f05q7taq1ttbs20ek7uug?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/693d2338000000001e006a66', tag:'上海种植牙于淞', structure:'医生信任型', level:'中信任', phase:'冷启动 / 验证期', role:'信任补强'}]}
+  ];
+  return [
+    {title:'精准症状转化型', desc:'以“精准症状词 + 顾虑解除词”为核心，是牙贴面赛道最重要的主力模型。', meta:'适合阶段：全阶段', role:'主力内容', strength:'表现：强转化 / 强意向', warning:'注意：优先级最高，但不要把“症状词”写得太泛，要尽量具体。', bucket:'main', notes:[{title:'门牙缝隙大好尴尬？选微贴！', cover:'http://sns-img-qn.xhscdn.com/1040g00831rq2lquo2m0g5phb8cm0u1ia1kebp7g?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/696ee02000000000220095e0', tag:'刘予颀', structure:'精准症状', level:'强转化', phase:'全阶段', role:'主力内容', top:true},{title:'19年深耕贴面美学，拒绝❌伤牙、模板、套路', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031rhvk5sa6u005qapp50qrneqob4eqno?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/696700ff000000000c03594b', tag:'王中亮', structure:'精准症状', level:'强转化 / 中信任', phase:'验证期 / 放量期', role:'主力内容', top:true},{title:'“天生”过小牙，不磨牙，单颗瓷贴面！', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31ovvurhk26105q3e4gj79bp7iae6ns8?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/691af24400000000040170f2', tag:'郭瑾婷', structure:'精准症状', level:'强转化', phase:'全阶段', role:'主力内容'}]},
+    {title:'FAQ决策答疑型', desc:'回答“能不能做 / 保持多久 / 怎么选”等高频问题，适合作为SEO基础设施。', meta:'适合阶段：冷启动', role:'基础设施', strength:'表现：中引流 / 低直接转化', warning:'注意：适合自然搜索流，不适合重投，容易被误当主力内容。', bucket:'infra', notes:[{title:'这五类人做牙贴面超级适合', cover:'', link:'', tag:'FAQ', structure:'FAQ型', level:'中引流', phase:'冷启动', role:'基础设施'}]},
+    {title:'效果展示型', desc:'以前后对比、真实案例来建立信任，互动通常不错，但转化通常不如精准症状型。', meta:'适合阶段：验证期-放量期', role:'辅助内容', strength:'表现：中信任 / 中互动', warning:'注意：容易被高估，适合作为辅助，不宜代替精准症状型。', bucket:'support', notes:[{title:'进来看 0.1mm 牙贴面到底有！多！薄！', cover:'http://sns-img-qn.xhscdn.com/1040g2sg31qab7go5gcjg5q804mqtp1927cpg1u0?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/694691d0000000001e0024e0', tag:'钟科', structure:'效果展示', level:'中互动', phase:'验证期', role:'辅助内容'},{title:'6颗贴面，沉浸式体验牙齿焕新过程', cover:'http://sns-img-qn.xhscdn.com/1040g2sg31s6jglemm8e05q8ivsidod2rc0v3abo?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/69845b83000000001a01f76b', tag:'海哥', structure:'效果展示', level:'中互动', phase:'验证期 / 放量期', role:'辅助内容'},{title:'瘪嘴笑不开、露龈笑？牙贴面邪修可以爆改！', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g34o31tnqd8uimq105qapp50qrneq2jdpdd0?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/69b66842000000001d018989', tag:'王中亮', structure:'效果展示', level:'中互动 / 中承接', phase:'验证期 / 放量期', role:'辅助内容'}]},
+    {title:'医生IP / 人设塑造型', desc:'讲从业故事、职业理念、日常，主要用来建立情感连接，不适合作为转化主力。', meta:'适合阶段：验证期', role:'信任补强', strength:'表现：中信任 / 低直接转化', warning:'注意：适合补信任，不适合单独承担咨询转化。', bucket:'trust', notes:[{title:'宝妈牙医日常｜上班的专业VS生活的松弛', cover:'http://sns-img-qn.xhscdn.com/1040g2sg31p7j2hdnise05q86l5cdp13k7o4m4a8?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/6922b813000000000d03a86e', tag:'刘予颀', structure:'医生信任型', level:'中信任', phase:'验证期', role:'信任补强'},{title:'我劝退了一位25岁想做牙贴面的女生', cover:'http://sns-img-qn.xhscdn.com/spectrum/1040g0k031ueofnk0hu005qapp50qrneq446ko78?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/69ccc1d1000000001d018dd3', tag:'王中亮', structure:'医生信任型', level:'中信任', phase:'验证期', role:'信任补强'},{title:'做牙如做人！15年敬畏心，只为做好这一件事', cover:'http://sns-img-qn.xhscdn.com/1040g00831raa2p84ga005q5s87u69g61abn6c5g?imageView2/2/w/540/format/jpg/q/75', link:'/discovery/item/6967097b0000000022038cdc', tag:'邓凤蕊', structure:'医生信任型', level:'中信任', phase:'验证期', role:'信任补强'}]}
+  ];
+};
+window.renderRefs=function(){renderLearnFilterBar();const sections=getContentTypesByItem().filter(matchLearnFilter);const refList=document.getElementById('refList');if(!refList)return;refList.innerHTML=sections.map(section=>`<div class="ref-section"><div class="ref-type-card"><div class="ref-type-title">${section.title}</div><div class="ref-type-desc">${section.desc}</div><div class="ref-type-meta">${section.meta}</div><div class="ref-type-role">角色：${section.role||'辅助内容'}</div><div class="ref-type-strength">${section.strength||''}</div><div class="ref-type-warning">${section.warning||''}</div></div><div class="ref-notes-grid">${section.notes.map(note=>note.link?`<a class="ref-note-card" href="${normalizeXhsLink(note.link)}" target="_blank"><div class="ref-note-cover">${note.cover?`<img src="${note.cover}" loading="lazy" onerror="this.style.display='none'; this.parentNode.querySelector('.ref-note-ph').style.display='flex';">`:''}<div class="ref-note-ph" style="${note.cover?'display:none;':'display:flex;'}">🦷</div><div class="note-structure">${note.structure||''}</div>${note.top?'<div class="top-tag">TOP</div>':''}<div class="ref-note-overlay"><div class="ref-note-overlay-title">${note.title}</div></div></div><div class="ref-note-body"><div class="ref-note-title">${note.title}</div><div class="ref-note-tag">${note.tag||''}</div><div class="note-meta">${note.level?`<span>${note.level}</span>`:''}${note.phase?`<span>${note.phase}</span>`:''}${note.role?`<span>${note.role}</span>`:''}</div></div></a>`:`<div class="ref-note-card ref-note-disabled"><div class="ref-note-cover"><div class="ref-note-ph">🦷</div><div class="note-structure">${note.structure||''}</div>${note.top?'<div class="top-tag">TOP</div>':''}<div class="ref-note-overlay"><div class="ref-note-overlay-title">${note.title}</div></div></div><div class="ref-note-body"><div class="ref-note-title">${note.title}</div><div class="ref-note-tag">${note.tag||''}</div><div class="note-meta">${note.level?`<span>${note.level}</span>`:''}${note.phase?`<span>${note.phase}</span>`:''}${note.role?`<span>${note.role}</span>`:''}</div></div></div>`).join('')}</div></div>`).join('');};
+window.addEventListener('load',()=>{renderLearnFilterBar();renderRefs();});
+})();
+
+    const aiSpuOptions = {
+      '种植牙': {
+        groups: {
+          '认知破圈': ['技术差异化','缺牙危害','风险提醒','传统方案误区','判断型答疑'],
+          '转化承接': ['引流转化','牙片帮看','预约号位','适合人群判断'],
+          '信任建立': ['医生人设','医生观点','治疗理念','劝退型','真实沟通记录']
+        }
+      },
+      '牙贴面': {
+        groups: {
+          '高意向转化': ['精准症状转化','门牙缝','过小牙','牙黄','单颗修复','不磨牙/少磨牙'],
+          '决策答疑': ['能保持多久','会不会伤牙','一颗能不能做','树脂vs瓷','适合人群','做之前要知道什么'],
+          '医生信任': ['医生人设','审美理念','劝退型','案例判断逻辑']
+        }
+      },
+      '正畸': {
+        groups: {
+          '前置判断': ['判断型','劝退型','需要不需要做','牙性/骨性判断','严重程度判断'],
+          '审美认知': ['审美误区','脸型vs牙齿','嘴凸认知','鼻基底/侧貌认知'],
+          '案例解释': ['案例解释','变化逻辑','深覆合','嘴凸','下巴后缩']
+        }
+      }
+    };
+
+    function renderAISelectors(){
+      const groupSelect = document.getElementById('contentGroup');
+      const angleSelect = document.getElementById('contentAngle');
+      if(!groupSelect || !angleSelect) return;
+      const spuName = getItemName(currentItem);
+      const groups = aiSpuOptions[spuName]?.groups || {};
+      const groupNames = Object.keys(groups);
+      groupSelect.innerHTML = groupNames.map(g => `<option value="${g}">${g}</option>`).join('');
+      const currentGroup = groupSelect.value;
+      angleSelect.innerHTML = (groups[currentGroup] || []).map(a => `<option value="${a}">${a}</option>`).join('');
+      groupSelect.onchange = () => {
+        angleSelect.innerHTML = (groups[groupSelect.value] || []).map(a => `<option value="${a}">${a}</option>`).join('');
+        renderComboLine();
+      };
+      angleSelect.onchange = renderComboLine;
+    }
+
+    function renderContentTypeRecommend(){
+      const box = document.getElementById('contentTypeRecommend');
+      if(!box) return;
+      const spuName = getItemName(currentItem);
+      const map = {
+        '种植牙': { main:'优先推荐：认知破圈 + 转化承接', desc:'先用技术差异和风险判断破圈，再用牙片帮看、预约号位承接咨询。', avoid:'不建议一上来只做纯科普。'},
+        '牙贴面': { main:'优先推荐：高意向转化 + 决策答疑', desc:'先打具体症状词，再补 FAQ 决策答疑，最适合高意向转化。', avoid:'不建议一上来写太泛的变美文案。'},
+        '正畸': { main:'优先推荐：前置判断 + 审美认知', desc:'先帮用户判断问题，再打破认知误区，比直接讲方案更稳。', avoid:'不建议一开始就重案例、重方案。'}
+      };
+      const data = map[spuName];
+      box.innerHTML = `<div class="ai-lite-title">推荐方向</div><div class="ai-lite-main">${data.main}</div><div class="ai-lite-desc">${data.desc}</div><div class="ai-lite-desc" style="color:#B38484;margin-top:4px;">${data.avoid}</div>`;
+    }
+
+    function renderComboLine(){
+      const box = document.getElementById('comboLine');
+      if(!box) return;
+      const spuName = getItemName(currentItem);
+      const group = document.getElementById('contentGroup')?.value || '';
+      const angle = document.getElementById('contentAngle')?.value || '';
+      const persona = document.getElementById('persona')?.value || '助理';
+      const goal = document.getElementById('contentGoal')?.value || '拉点击';
+      const mode = currentMode === 'video' ? '视频脚本' : '图文';
+      box.innerHTML = `当前会按：<b>${escapeHtml(spuName)}</b> × <b>${escapeHtml(group)}</b> × <b>${escapeHtml(angle)}</b> × <b>${escapeHtml(persona)}</b> × <b>${escapeHtml(goal)}</b> 生成 <b>${mode}</b>。`;
+    }
+
+    const _oldSwitchItem = switchItem;
+    switchItem = function(item){
+      _oldSwitchItem(item);
+      renderAISelectors();
+      renderContentTypeRecommend();
+      renderComboLine();
+    };
+
+    const _oldSwitchMode = switchMode;
+    switchMode = function(mode, el){
+      _oldSwitchMode(mode, el);
+      renderComboLine();
+    };
+
+    const _oldShowTab = showTab;
+    showTab = function(i){
+      _oldShowTab(i);
+      if(i===3){
+        renderAISelectors();
+        renderContentTypeRecommend();
+        renderComboLine();
+      }
+    };
+
+    window.addEventListener('load', function(){
+      renderAISelectors();
+      renderContentTypeRecommend();
+      renderComboLine();
+      const btn = document.getElementById('generateBtnApi');
+      if(btn){ btn.addEventListener('click', generateAI); }
+      ['contentGoal','persona'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('change', renderComboLine);
+      });
+    });
+
+</script>
+
+
+<style>
+.ai-lite-card{background:#F8FCFC;border:1px solid rgba(195,227,239,.62);border-radius:14px;padding:12px;margin-top:10px}
+.ai-lite-title{font-size:12px;font-weight:700;color:#5A7582;margin-bottom:6px}
+.ai-lite-main{font-size:13px;font-weight:700;color:#55717d;margin-bottom:4px}
+.ai-lite-desc,.ai-lite-warn,.ai-combo-line{font-size:11px;line-height:1.6;color:#7F96A1}
+.ai-lite-warn{color:#B38484;margin-top:4px}
+.result-block pre{white-space:pre-wrap;margin:0;font-family:inherit;line-height:1.8;color:#617B87;font-size:13px}
+
+    .header-meta{ margin-top:4px; font-size:11px; color:#9AA8B0; text-align:center; letter-spacing:.2px; }
+
+    @media (max-width: 768px){
+      html,body{ overflow-x:hidden; }
+      body{ display:block; }
+      .app{ max-width:none; width:100%; padding-bottom:96px; }
+      .topbar-inner{ max-width:none; }
+      .app-title{ justify-content:center; text-align:center; font-size:18px; }
+      .app-sub{ text-align:center; }
+      .container{ padding:12px 12px 24px; }
+      .quick-grid,
+      .kpi-grid,
+      .result-actions{
+        grid-template-columns:1fr !important;
+      }
+      .tab{
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+      }
+      .tab button{ font-size:12px; padding:10px 4px; }
+      .item-switch{ padding-top:10px; }
+      .hero-title{ font-size:20px; }
+      .hero-desc{ font-size:12px; }
+      .plan-card,.card,.preview-content-card,.compliance-card,.hero-card,.notice-card,.quick-card,.ref-type-card{
+        border-radius:16px;
+      }
+      .ref-notes-grid{ grid-template-columns:1fr 1fr; gap:8px; }
+      .ref-note-overlay-title{ font-size:14px; }
+      .note-meta{ gap:4px; }
+      .path-block .kpi-grid{ grid-template-columns:1fr !important; }
+      .matrix-grid{ grid-template-columns:1fr !important; }
+      .hero-tags span{ font-size:10px; }
+    }
+
+  </style>
+<script>
+(function(){
+
+  function bindGenerateButton(){
+    const btn = document.querySelector('#tab3 .btn[onclick*="generateAI"]');
+    if(btn && !btn.dataset.boundGen){
+      btn.dataset.boundGen = '1';
+      btn.addEventListener('click', function(){ window.generateAI(); });
+    }
+  }
+
+  function ensureAIControls(){
+    const aiCard = document.querySelector('#tab3 .card');
+    if(!aiCard || document.getElementById('contentType')) return;
+    const angleRow = aiCard.querySelector('#angle')?.closest('.form-row');
+    if(!angleRow) return;
+
+    const row = document.createElement('div');
+    row.className = 'form-row';
+    row.innerHTML = '<label class="form-label">内容类型</label><select id="contentType" class="form-input"></select>';
+    angleRow.insertAdjacentElement('afterend', row);
+
+    const rec = document.createElement('div');
+    rec.id = 'contentTypeRecommend';
+    rec.className = 'ai-lite-card';
+    row.insertAdjacentElement('afterend', rec);
+
+    const sellRow = document.getElementById('selling')?.closest('.form-row');
+    if(sellRow){
+      const combo = document.createElement('div');
+      combo.id = 'comboLine';
+      combo.className = 'ai-combo-line';
+      combo.style.marginTop = '8px';
+      sellRow.insertAdjacentElement('afterend', combo);
+    }
+
+    ['contentGoal','persona','angle','contentType'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.addEventListener('change', renderComboLine);
+    });
+    renderContentType();
+    renderContentTypeRecommend();
+    renderComboLine();
+    bindGenerateButton();
+  }
+
+  window.getContentTypeOptions = function(item=currentItem){
+    if(item === 'implant'){
+      return [
+        {value:'tech', label:'技术差异化'},
+        {value:'convert', label:'引流转化'},
+        {value:'risk', label:'风险提醒'},
+        {value:'faq', label:'科普答疑'}
+      ];
+    }
+    if(item === 'veneer'){
+      return [
+        {value:'symptom', label:'精准症状转化'},
+        {value:'faq', label:'FAQ决策型'},
+        {value:'case', label:'效果展示'},
+        {value:'trust', label:'医生人设'}
+      ];
+    }
+    return [
+      {value:'judge', label:'判断型'},
+      {value:'avoid', label:'劝退型'},
+      {value:'case', label:'案例解释'},
+      {value:'trust', label:'医生人设'}
+    ];
+  }
+
+  window.renderContentType = function(){
+    const select = document.getElementById('contentType');
+    if(!select) return;
+    const old = select.value;
+    const opts = getContentTypeOptions(currentItem);
+    select.innerHTML = opts.map(o=>`<option value="${o.value}">${o.label}</option>`).join('');
+    if(opts.some(o=>o.value===old)) select.value = old;
+  }
+
+  window.getContentTypeRecommend = function(item=currentItem){
+    if(item === 'implant') return {
+      main:'优先推荐：技术差异化 + 引流转化',
+      desc:'前者更适合破圈，后者更适合承接咨询，两者一起用会更稳。',
+      warn:'不建议优先重投纯科普内容。'
+    };
+    if(item === 'veneer') return {
+      main:'优先推荐：精准症状转化型',
+      desc:'先把具体问题讲清楚，再补效果展示和医生信任。',
+      warn:'不建议优先做泛FAQ或纯促销表达。'
+    };
+    return {
+      main:'优先推荐：判断型 + 劝退型',
+      desc:'先帮用户判断问题，再慢慢建立信任和结果理解。',
+      warn:'不建议一上来只做纯医生科普或直接卖项目。'
+    };
+  }
+
+  window.renderContentTypeRecommend = function(){
+    const box = document.getElementById('contentTypeRecommend');
+    if(!box) return;
+    const data = getContentTypeRecommend(currentItem);
+    box.innerHTML = `<div class="ai-lite-title">推荐方向</div><div class="ai-lite-main">${data.main}</div><div class="ai-lite-desc">${data.desc}</div><div class="ai-lite-warn">${data.warn}</div>`;
+  }
+
+  function formatName(){ return window.currentMode === 'post' ? '图文' : '视频脚本'; }
+  function goalText(v){ return v==='consult'?'拉咨询':v==='click'?'拉点击':'建信任'; }
+  function personaText(v){ return v||'助理'; }
+  window.renderComboLine = function(){
+    const line = document.getElementById('comboLine');
+    if(!line) return;
+    const g = document.getElementById('contentGoal')?.value || 'click';
+    const p = document.getElementById('persona')?.value || '助理';
+    const t = document.getElementById('contentType')?.selectedOptions?.[0]?.textContent || '';
+    line.innerHTML = `当前会按：<b>${getItemName(currentItem)}</b> × <b>${t}</b> × <b>${personaText(p)}</b> × <b>${goalText(g)}</b> 来生成${formatName()}。`;
+  }
+
+  const oldSwitchItem = window.switchItem;
+  window.switchItem = function(item, el){
+    oldSwitchItem(item, el);
+    ensureAIControls();
+    renderContentType();
+    renderContentTypeRecommend();
+    renderComboLine();
+    bindGenerateButton();
+  }
+
+  const oldSwitchMode = window.switchMode;
+  window.switchMode = function(mode, el){
+    window.currentMode = mode;
+    oldSwitchMode(mode, el);
+    renderComboLine();
+    bindGenerateButton();
+  }
+
+  function compressPain(raw){
+    const text = (raw || '').trim();
+    if(!text) return { issue:'这个问题', concern:'' };
+    const patterns = [
+      { re:/缺牙.*久|拖了.*久|很多年没处理/, issue:'缺牙拖很久' },
+      { re:/怕疼|疼/, concern:'怕疼' },
+      { re:/恢复慢|恢复/, concern:'怕恢复慢' },
+      { re:/门牙.*缝|牙缝/, issue:'门牙有缝' },
+      { re:/过小牙/, issue:'过小牙' },
+      { re:/牙黄|发黄/, issue:'牙黄' },
+      { re:/嘴凸/, issue:'嘴凸' },
+      { re:/深覆合|下牙.*看不见/, issue:'深覆合' },
+      { re:/怕伤牙/, concern:'怕伤牙' }
+    ];
+    let issue='', concern='';
+    for(const p of patterns){
+      if(p.re.test(text)){
+        if(p.issue && !issue) issue = p.issue;
+        if(p.concern && !concern) concern = p.concern;
+      }
+    }
+    if(!issue) issue = text.replace(/[，。,.！!？?].*$/,'').slice(0,8) || '这个问题';
+    return { issue, concern };
+  }
+
+  function buildTitlesV3(item, type, painObj){
+    const issue = painObj.issue || '这个问题';
+    const concern = painObj.concern || '';
+    if(item === 'implant'){
+      if(type === 'tech') return [`幸亏没急着按老办法做，${issue}的人先看`,`$${''}`.slice(1)+`${issue}，不一定只能走老路`,`${issue}${concern ? '，' + concern + '的人' : '的人'}，先别急着决定`];
+      if(type === 'convert') return [`${issue}，可以先帮你看看`,`${issue}${concern ? '，' + concern : ''}，先别急着做决定`,`${issue}，先把情况弄清楚再说`];
+      if(type === 'risk') return [`${issue}，真的别一直拖`,`很多人把${issue}拖久了，后面更麻烦`,`${issue}，先别觉得拖一拖没事`];
+      return [`${issue}，先把这几个问题想清楚`,`${issue}，很多人第一步就问早了`,`${issue}，别急着问方案`];
+    }
+    if(item === 'veneer'){
+      if(type === 'symptom') return [`${issue}，很多人第一步就选重了`,`${issue}${concern ? '，' + concern : ''}，先别急着做决定`,`${issue}，不一定要走最重那条路`];
+      if(type === 'faq') return [`${issue}，最常被问到的其实是这件事`,`${issue}，先把适不适合想清楚`,`${issue}，很多人担心的点其实都一样`];
+      if(type === 'case') return [`${issue}，做完后最明显的变化是什么`,`${issue}，为什么有人看起来变化更自然`,`${issue}，这种改善更适合哪类人`];
+      return [`遇到${issue}，我一般不会先劝你做`,`${issue}，我更怕你一开始就做太快`,`${issue}，先判断，比先决定更重要`];
+    }
+    if(type === 'judge') return [`${issue}，很多人第一步就判断错了`,`${issue}，先别急着问怎么做`,`${issue}，先看是不是这个问题`];
+    if(type === 'avoid') return [`${issue}，先别急着做`,`${issue}，越着急越容易判断错`,`${issue}，第一步不是快，是先分清楚`];
+    if(type === 'case') return [`${issue}，这种变化通常是怎么来的`,`${issue}，结果感为什么会不一样`,`${issue}，这类情况更适合怎么判断`];
+    return [`关于${issue}，我一般先讲判断`,`${issue}，先别急着下结论`,`${issue}，很多问题其实都问早了`];
+  }
+
+  function buildPostV3(item, type, goal, persona, painObj, selling){
+    const issue = painObj.issue || '这个问题';
+    const concern = painObj.concern ? `，${painObj.concern}` : '';
+    const sell = (selling || '').trim();
+    let voice = {open:'', turn:'', close:''};
+    if(persona === '医生'){
+      voice.open = `很多人来问 ${issue}，第一句话通常就是：要不要赶紧处理。`;
+      voice.turn = `但我更在意的，往往不是快，而是先把情况判断清楚。`;
+      voice.close = `先判断，再决定，通常会比急着做更稳。`;
+    }else if(persona === '助理'){
+      voice.open = `我们平时接到很多关于 ${issue} 的咨询，大家最常见的反应就是先紧张。`;
+      voice.turn = `但这类问题一般都不适合一上来就急着往下做。`;
+      voice.close = `先把问题讲具体，再决定下一步，通常会轻松很多。`;
+    }else{
+      voice.open = `遇到 ${issue} 这类情况，很多人第一步都会先想“是不是要赶紧处理”。`;
+      voice.turn = `但更重要的，通常是先把现在的情况和顾虑弄清楚。`;
+      voice.close = `先看清楚，再做选择，会更稳。`;
+    }
+    let middle='';
+    if(item === 'implant'){
+      if(type === 'tech') middle = `尤其是 ${issue}${concern} 这类情况，很多人会默认只能按老办法来。\n\n其实不一定。\n\n越是这种时候，越要先分清楚：你现在到底适合哪种方式，而不是先被一个固定答案带走。`;
+      else if(type === 'convert') middle = `像 ${issue}${concern} 这种问题，其实最怕的不是慢，而是还没搞清楚就先做决定。\n\n这类情况更适合先把基础情况说明白，再看有没有必要继续往下走。`;
+      else if(type === 'risk') middle = `${issue} 这类问题，很多人会觉得拖一拖也没什么。\n\n但拖久了，通常不会让问题自己变轻，反而容易把后面的选择变少。`;
+      else middle = `关于 ${issue}，很多人最容易卡在信息太多、说法太杂。\n\n所以比起一上来问方案，更值得先把关键问题想清楚。`;
+    } else if(item === 'veneer'){
+      if(type === 'symptom') middle = `${issue}${concern} 这种问题，很多人第一步就会往很重的方向想。\n\n但不是所有情况都要走到那一步。\n\n先判断适不适合，再决定怎么做，会稳很多。`;
+      else if(type === 'faq') middle = `关于 ${issue}，大家最常问的其实不是一个点。\n\n很多顾虑都很正常，但顺序很重要：先判断适不适合，再看后面的细节。`;
+      else if(type === 'case') middle = `${issue} 这类内容，很多人只看结果。\n\n但真正更值得看的，是这种变化感为什么会出现，什么样的人更适合。`;
+      else middle = `每次有人来问 ${issue}，我通常都不会先讲“做什么”。\n\n我更在意的是先把适不适合、担心点和边界讲清楚。`;
+    } else {
+      if(type === 'judge') middle = `${issue} 这类问题，很多人第一步就会判断错。\n\n因为它不是一个单一原因，前面没分清，后面看再多方案也容易越来越乱。`;
+      else if(type === 'avoid') middle = `越是遇到 ${issue}，越容易想快一点。\n\n但正畸这类问题，第一步往往不是快，而是先判断。`;
+      else if(type === 'case') middle = `${issue} 这类情况，很多人只盯着结果图。\n\n但真正更值得看的，是这种变化是怎么来的，适合什么样的基础条件。`;
+      else middle = `关于 ${issue}，我一般不会先讲怎么做。\n\n我更在意的是先把情况分清楚，再决定有没有必要往下看。`;
+    }
+    const sellingPart = sell ? `\n\n像“${sell}”这种信息，反而比直接问价格或方案更值得先讲清楚。` : '';
+    const cta = goal === 'consult' ? '如果你也在纠结类似情况，先把问题讲具体一点，再决定下一步。' : goal === 'click' ? '如果你也有类似困扰，先把这一步想清楚。' : '这类问题不怕慢，怕的是一开始就判断错。';
+    const titles = buildTitlesV3(item, type, painObj);
+    return { titles, cover: titles[0].replace(/，/g,'\n').slice(0,24), body: `${voice.open}\n\n${voice.turn}\n\n${middle}${sellingPart}\n\n${voice.close}`, cta };
+  }
+
+  function buildVideoV3(item, type, goal, persona, painObj, selling){
+    const issue = painObj.issue || '这个问题';
+    const concern = painObj.concern ? `，${painObj.concern}` : '';
+    const sell = (selling || '').trim();
+    let hook='', middle1='', middle2='';
+    if(item === 'implant'){
+      if(type === 'tech'){ hook=`很多人遇到 ${issue}，第一反应就按老办法。`; middle1='但越是这种情况，越不能急。'; middle2=`先分清楚你适合什么，再决定要不要往下走。${sell ? ` ${sell}。` : ''}`; }
+      else if(type === 'convert'){ hook=`${issue}${concern}，先别急着做决定。`; middle1='这类情况更适合先把片子和基础情况看明白。'; middle2= sell ? `${sell}。` : '先弄清楚，再往下看。'; }
+      else if(type === 'risk'){ hook=`${issue}，真的别一直拖。`; middle1='很多问题不是拖着就会自己变轻。'; middle2= sell ? `${sell}。` : '拖久了，后面选择反而会更少。'; }
+      else { hook=`${issue}，很多人第一句就问早了。`; middle1='这类问题先别急着问方案。'; middle2= sell ? `${sell}。` : '先把判断顺序想清楚，更重要。'; }
+    } else if(item === 'veneer'){
+      if(type === 'symptom'){ hook=`${issue}${concern}，很多人第一步就选重了。`; middle1='其实不是所有情况都要走最重那条路。'; middle2= sell ? `${sell}。` : '先判断适不适合，再决定怎么做。'; }
+      else if(type === 'faq'){ hook=`关于 ${issue}，大家最常担心的其实差不多。`; middle1='但顺序很重要，不是先问能不能做。'; middle2= sell ? `${sell}。` : '而是先问适不适合。'; }
+      else if(type === 'case'){ hook=`${issue}，很多人只看结果图。`; middle1='但更值得看的是，这种变化为什么会出现。'; middle2= sell ? `${sell}。` : '先看懂逻辑，比只看变化更重要。'; }
+      else { hook=`遇到 ${issue}，我一般不会先劝你做。`; middle1='我更怕你一开始就做太快。'; middle2= sell ? `${sell}。` : '先把适不适合讲清楚，更重要。'; }
+    } else {
+      if(type === 'judge'){ hook=`${issue}，很多人第一步就判断错了。`; middle1='因为这类问题，不是一个单一原因。'; middle2= sell ? `${sell}。` : '前面没分清，后面看再多方案也容易乱。'; }
+      else if(type === 'avoid'){ hook=`${issue}，先别急。`; middle1='越着急，越容易把判断做错。'; middle2= sell ? `${sell}。` : '先分清楚，再决定，通常更稳。'; }
+      else if(type === 'case'){ hook=`${issue}，别只看结果图。`; middle1='更重要的是，这种变化是怎么来的。'; middle2= sell ? `${sell}。` : '先看懂逻辑，再看方案。'; }
+      else { hook=`关于 ${issue}，我一般先讲判断。`; middle1='不是先讲怎么做。'; middle2= sell ? `${sell}。` : '先把情况分清楚，再决定下一步。'; }
+    }
+    if(persona === '助理') hook = hook.replace('我一般','我们一般');
+    if(persona === '机构号') hook = hook.replace('我一般','这类情况一般').replace('我更怕','更需要避免的是');
+    const end = goal === 'consult' ? '如果你也在纠结类似情况，先把问题讲具体一点。' : goal === 'click' ? '这一步想清楚了，后面会轻松很多。' : '先判断清楚，比先做决定更重要。';
+    return { titles: buildTitlesV3(item, type, painObj), script: `【开头3秒】\n${hook}\n\n【中段】\n${middle1}\n${middle2}\n\n【转折】\n不是所有人都适合同一种思路，越具体的问题，越要具体判断。\n\n【结尾】\n${end}`, cta:end };
+  }
+
+  window.generateAI = function(){
+    ensureAIControls();
+    const goal = document.getElementById('contentGoal')?.value || 'click';
+    const persona = document.getElementById('persona')?.value || '助理';
+    const type = document.getElementById('contentType')?.value || getContentTypeOptions(currentItem)[0].value;
+    const rawPain = document.getElementById('pain')?.value || '';
+    const selling = document.getElementById('selling')?.value || '';
+    const painObj = compressPain(rawPain || getDefaultPain(currentItem));
+    const box = document.getElementById('aiResult');
+    if(!box) return;
+    const result = window.currentMode === 'post' ? buildPostV3(currentItem, type, goal, persona, painObj, selling || getDefaultSelling(currentItem)) : buildVideoV3(currentItem, type, goal, persona, painObj, selling || getDefaultSelling(currentItem));
+    if(window.currentMode === 'post'){
+      box.innerHTML = `
+        <div class="result-wrap">
+          <div class="result-card">
+            <div class="result-title">标题方向</div>
+            ${result.titles.map(t => `<div class="result-block"><p>${t}</p></div>`).join('')}
+          </div>
+          <div class="result-card">
+            <div class="result-title">封面文案</div>
+            <div class="result-block"><p>${result.cover}</p></div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">正文成稿</div>
+            <div class="result-block"><pre>${result.body}</pre></div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">评论区引导</div>
+            <div class="result-block"><p>${result.cta}</p></div>
+          </div>
+        </div>`;
+    } else {
+      box.innerHTML = `
+        <div class="result-wrap">
+          <div class="result-card">
+            <div class="result-title">视频标题</div>
+            ${result.titles.map(t => `<div class="result-block"><p>${t}</p></div>`).join('')}
+          </div>
+          <div class="result-card">
+            <div class="result-title">脚本成稿</div>
+            <div class="result-block"><pre>${result.script}</pre></div>
+          </div>
+          <div class="result-card">
+            <div class="result-title">评论区引导</div>
+            <div class="result-block"><p>${result.cta}</p></div>
+          </div>
+        </div>`;
+    }
+    box.classList.remove('hidden');
+    box.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  window.addEventListener('load', function(){
+    window.currentMode = 'post';
+    ensureAIControls();
+    renderContentType();
+    renderContentTypeRecommend();
+    renderComboLine();
+    bindGenerateButton();
+  });
+})();
+
+    const aiSpuOptions = {
+      '种植牙': {
+        groups: {
+          '认知破圈': ['技术差异化','缺牙危害','风险提醒','传统方案误区','判断型答疑'],
+          '转化承接': ['引流转化','牙片帮看','预约号位','适合人群判断'],
+          '信任建立': ['医生人设','医生观点','治疗理念','劝退型','真实沟通记录']
+        }
+      },
+      '牙贴面': {
+        groups: {
+          '高意向转化': ['精准症状转化','门牙缝','过小牙','牙黄','单颗修复','不磨牙/少磨牙'],
+          '决策答疑': ['能保持多久','会不会伤牙','一颗能不能做','树脂vs瓷','适合人群','做之前要知道什么'],
+          '医生信任': ['医生人设','审美理念','劝退型','案例判断逻辑']
+        }
+      },
+      '正畸': {
+        groups: {
+          '前置判断': ['判断型','劝退型','需要不需要做','牙性/骨性判断','严重程度判断'],
+          '审美认知': ['审美误区','脸型vs牙齿','嘴凸认知','鼻基底/侧貌认知'],
+          '案例解释': ['案例解释','变化逻辑','深覆合','嘴凸','下巴后缩']
+        }
+      }
+    };
+
+    function renderAISelectors(){
+      const groupSelect = document.getElementById('contentGroup');
+      const angleSelect = document.getElementById('contentAngle');
+      if(!groupSelect || !angleSelect) return;
+      const spuName = getItemName(currentItem);
+      const groups = aiSpuOptions[spuName]?.groups || {};
+      const groupNames = Object.keys(groups);
+      groupSelect.innerHTML = groupNames.map(g => `<option value="${g}">${g}</option>`).join('');
+      const currentGroup = groupSelect.value;
+      angleSelect.innerHTML = (groups[currentGroup] || []).map(a => `<option value="${a}">${a}</option>`).join('');
+      groupSelect.onchange = () => {
+        angleSelect.innerHTML = (groups[groupSelect.value] || []).map(a => `<option value="${a}">${a}</option>`).join('');
+        renderComboLine();
+      };
+      angleSelect.onchange = renderComboLine;
+    }
+
+    function renderContentTypeRecommend(){
+      const box = document.getElementById('contentTypeRecommend');
+      if(!box) return;
+      const spuName = getItemName(currentItem);
+      const map = {
+        '种植牙': { main:'优先推荐：认知破圈 + 转化承接', desc:'先用技术差异和风险判断破圈，再用牙片帮看、预约号位承接咨询。', avoid:'不建议一上来只做纯科普。'},
+        '牙贴面': { main:'优先推荐：高意向转化 + 决策答疑', desc:'先打具体症状词，再补 FAQ 决策答疑，最适合高意向转化。', avoid:'不建议一上来写太泛的变美文案。'},
+        '正畸': { main:'优先推荐：前置判断 + 审美认知', desc:'先帮用户判断问题，再打破认知误区，比直接讲方案更稳。', avoid:'不建议一开始就重案例、重方案。'}
+      };
+      const data = map[spuName];
+      box.innerHTML = `<div class="ai-lite-title">推荐方向</div><div class="ai-lite-main">${data.main}</div><div class="ai-lite-desc">${data.desc}</div><div class="ai-lite-desc" style="color:#B38484;margin-top:4px;">${data.avoid}</div>`;
+    }
+
+    function renderComboLine(){
+      const box = document.getElementById('comboLine');
+      if(!box) return;
+      const spuName = getItemName(currentItem);
+      const group = document.getElementById('contentGroup')?.value || '';
+      const angle = document.getElementById('contentAngle')?.value || '';
+      const persona = document.getElementById('persona')?.value || '助理';
+      const goal = document.getElementById('contentGoal')?.value || '拉点击';
+      const mode = currentMode === 'video' ? '视频脚本' : '图文';
+      box.innerHTML = `当前会按：<b>${escapeHtml(spuName)}</b> × <b>${escapeHtml(group)}</b> × <b>${escapeHtml(angle)}</b> × <b>${escapeHtml(persona)}</b> × <b>${escapeHtml(goal)}</b> 生成 <b>${mode}</b>。`;
+    }
+
+    const _oldSwitchItem = switchItem;
+    switchItem = function(item){
+      _oldSwitchItem(item);
+      renderAISelectors();
+      renderContentTypeRecommend();
+      renderComboLine();
+    };
+
+    const _oldSwitchMode = switchMode;
+    switchMode = function(mode, el){
+      _oldSwitchMode(mode, el);
+      renderComboLine();
+    };
+
+    const _oldShowTab = showTab;
+    showTab = function(i){
+      _oldShowTab(i);
+      if(i===3){
+        renderAISelectors();
+        renderContentTypeRecommend();
+        renderComboLine();
+      }
+    };
+
+    window.addEventListener('load', function(){
+      renderAISelectors();
+      renderContentTypeRecommend();
+      renderComboLine();
+      const btn = document.getElementById('generateBtnApi');
+      if(btn){ btn.addEventListener('click', generateAI); }
+      ['contentGoal','persona'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('change', renderComboLine);
+      });
+    });
+
+</script>
+
 </body>
 </html>
